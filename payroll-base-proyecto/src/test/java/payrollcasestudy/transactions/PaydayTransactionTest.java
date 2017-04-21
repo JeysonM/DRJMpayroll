@@ -159,24 +159,24 @@ public class PaydayTransactionTest {
         validateHourlyPaycheck(paydayTransaction, employeeId, payDate, 2.0 * hourlySalary);
     }
 
-//    @Test
-//    public void testSalariedUnionMemberDues() throws Exception {
-//        int employeeId = 1;
-//        Transaction addEmployeeTransaction = new AddSalariedEmployeeTransaction(employeeId, "Bob", "Home", 1000.0);
-//        addEmployeeTransaction.execute();
-//        int memberId = 7734;
-//        double weeklyUnionDues = 9.42;
-//        ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(employeeId, memberId, weeklyUnionDues);
-//        changeMemberTransaction.execute();
-//
-//        Calendar payDate = new GregorianCalendar(2001, NOVEMBER, 30);
-//        PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
-//        paydayTransaction.execute();
-//
-//        int numberOfWeeksInPayPeriod = 5;
-//        double expectedDues = numberOfWeeksInPayPeriod * weeklyUnionDues;
-//        validateHourlyPaycheck(paydayTransaction, employeeId, payDate, 1000.0, expectedDues);
-//    }
+    @Test
+    public void testSalariedUnionMemberDues() throws Exception {
+        int employeeId = 1;
+        Transaction addEmployeeTransaction = new AddSalariedEmployeeTransaction(employeeId, "Bob", "Home", 1000.0);
+        addEmployeeTransaction.execute();
+        int memberId = 7734;
+        double weeklyUnionDues = 9.42;
+        ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(employeeId, memberId, weeklyUnionDues);
+        changeMemberTransaction.execute();
+
+        Calendar payDate = new GregorianCalendar(2001, NOVEMBER, 30);
+        PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+        paydayTransaction.execute();
+
+        int numberOfWeeksInPayPeriod = 5;
+        double expectedDues = numberOfWeeksInPayPeriod * weeklyUnionDues;
+        validateHourlyPaycheck(paydayTransaction, employeeId, payDate, 1000.0, expectedDues);
+    }
 
     @Test
     public void testPaySingleCommissionedEmployeeNoReceipts() throws Exception {
@@ -211,79 +211,79 @@ public class PaydayTransactionTest {
         validateCommissionedPaycheck(employeeId, payDate, paydayTransaction, monthlySalary + receiptAmount * commissionRate);
     }
 
-//    @Test
-//    public void testHourlyUnionMemberServiceCharge() throws Exception {
-//        int employeeId = 1;
-//        Calendar payDate = new GregorianCalendar(2001, NOVEMBER, 30);
-//        int memberId = 7734;
-//        double weeklyUnionDues = 9.42;
-//        double hourlyRate = 20.0;
-//
-//        Transaction addEmployeeTransaction = new AddHourlyEmployeeTransaction(employeeId, "Bob", "Home", hourlyRate);
-//        addEmployeeTransaction.execute();
-//
-//        ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(employeeId, memberId, weeklyUnionDues);
-//        changeMemberTransaction.execute();
-//
-//        double serviceCharge = 19.42;
-//        Transaction addServiceChargeTransaction = new AddServiceChargeTransaction(memberId, payDate, serviceCharge);
-//        addServiceChargeTransaction.execute();
-//
-//        Transaction addTimeCardTransaction = new AddTimeCardTransaction(payDate, 8.0, employeeId);
-//        addTimeCardTransaction.execute();
-//
-//        PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
-//        paydayTransaction.execute();
-//
-//        PayCheck payCheck = paydayTransaction.getPaycheck(employeeId);
-//        assertThat(payCheck.getPayPeriodEnd(), is(payDate));
-//        assertThat(payCheck.getGrossPay(), is(closeTo(8 * hourlyRate, FLOAT_ACCURACY)));
-//        assertThat("Hold", is(payCheck.getField("Disposition")));
-//        assertThat(payCheck.getDeductions(), is(closeTo(weeklyUnionDues + serviceCharge, FLOAT_ACCURACY)));
-//        assertThat(payCheck.getNetPay(), is(closeTo(8 * hourlyRate - (weeklyUnionDues + serviceCharge), FLOAT_ACCURACY)));
-//    }
+    @Test
+    public void testHourlyUnionMemberServiceCharge() throws Exception {
+        int employeeId = 1;
+        Calendar payDate = new GregorianCalendar(2001, NOVEMBER, 30);
+        int memberId = 7734;
+        double weeklyUnionDues = 9.42;
+        double hourlyRate = 20.0;
 
-//    @Test
-//    public void testServiceChargesSpanningMultiplePayPeriods() throws Exception {
-//        int employeeId = 1;
-//        Calendar payDate = FRIDAY;
-//        Calendar previousPayDate = (Calendar) FRIDAY.clone();
-//        previousPayDate.add(Calendar.DAY_OF_WEEK, -7);
-//        Calendar nextPayDate = (Calendar) FRIDAY.clone();
-//        nextPayDate.add(Calendar.DAY_OF_WEEK, 7);
-//        int memberId = 7734;
-//        double weeklyUnionDues = 9.42;
-//        double hourlyRate = 20.0;
-//
-//        Transaction addEmployeeTransaction = new AddHourlyEmployeeTransaction(employeeId, "Bob", "Home", hourlyRate);
-//        addEmployeeTransaction.execute();
-//
-//        ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(employeeId, memberId, weeklyUnionDues);
-//        changeMemberTransaction.execute();
-//
-//        double serviceCharge = 19.42;
-//        Transaction addServiceChargeTransaction = new AddServiceChargeTransaction(memberId, payDate, serviceCharge);
-//        addServiceChargeTransaction.execute();
-//
-//        Transaction lateServiceChargeTransaction = new AddServiceChargeTransaction(memberId, previousPayDate, 100.0);
-//        lateServiceChargeTransaction.execute();
-//
-//        Transaction earlyServiceChargeTransaction = new AddServiceChargeTransaction(memberId, nextPayDate, 200.0);
-//        earlyServiceChargeTransaction.execute();
-//
-//        Transaction addTimeCardTransaction = new AddTimeCardTransaction(payDate, 8.0, employeeId);
-//        addTimeCardTransaction.execute();
-//
-//        PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
-//        paydayTransaction.execute();
-//
-//        PayCheck payCheck = paydayTransaction.getPaycheck(employeeId);
-//        assertThat(payCheck.getPayPeriodEnd(), is(payDate));
-//        assertThat(payCheck.getGrossPay(), is(closeTo(8 * hourlyRate, FLOAT_ACCURACY)));
-//        assertThat("Hold", is(payCheck.getField("Disposition")));
-//        assertThat(payCheck.getDeductions(), is(closeTo(weeklyUnionDues + serviceCharge, FLOAT_ACCURACY)));
-//        assertThat(payCheck.getNetPay(), is(closeTo(8 * hourlyRate - (weeklyUnionDues + serviceCharge), FLOAT_ACCURACY)));
-//    }
+        Transaction addEmployeeTransaction = new AddHourlyEmployeeTransaction(employeeId, "Bob", "Home", hourlyRate);
+        addEmployeeTransaction.execute();
+
+        ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(employeeId, memberId, weeklyUnionDues);
+        changeMemberTransaction.execute();
+
+        double serviceCharge = 19.42;
+        Transaction addServiceChargeTransaction = new AddServiceChargeTransaction(memberId, payDate, serviceCharge);
+        addServiceChargeTransaction.execute();
+
+        Transaction addTimeCardTransaction = new AddTimeCardTransaction(payDate, 8.0, employeeId);
+        addTimeCardTransaction.execute();
+
+        PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+        paydayTransaction.execute();
+
+        PayCheck payCheck = paydayTransaction.getPaycheck(employeeId);
+        assertThat(payCheck.getPayPeriodEnd(), is(payDate));
+        assertThat(payCheck.getGrossPay(), is(closeTo(8 * hourlyRate, FLOAT_ACCURACY)));
+        assertThat("Hold", is(payCheck.getField("Disposition")));
+        assertThat(payCheck.getDeductions(), is(closeTo(weeklyUnionDues + serviceCharge, FLOAT_ACCURACY)));
+        assertThat(payCheck.getNetPay(), is(closeTo(8 * hourlyRate - (weeklyUnionDues + serviceCharge), FLOAT_ACCURACY)));
+    }
+
+    @Test
+    public void testServiceChargesSpanningMultiplePayPeriods() throws Exception {
+        int employeeId = 1;
+        Calendar payDate = FRIDAY;
+        Calendar previousPayDate = (Calendar) FRIDAY.clone();
+        previousPayDate.add(Calendar.DAY_OF_WEEK, -7);
+        Calendar nextPayDate = (Calendar) FRIDAY.clone();
+        nextPayDate.add(Calendar.DAY_OF_WEEK, 7);
+        int memberId = 7734;
+        double weeklyUnionDues = 9.42;
+        double hourlyRate = 20.0;
+
+        Transaction addEmployeeTransaction = new AddHourlyEmployeeTransaction(employeeId, "Bob", "Home", hourlyRate);
+        addEmployeeTransaction.execute();
+
+        ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(employeeId, memberId, weeklyUnionDues);
+        changeMemberTransaction.execute();
+
+        double serviceCharge = 19.42;
+        Transaction addServiceChargeTransaction = new AddServiceChargeTransaction(memberId, payDate, serviceCharge);
+        addServiceChargeTransaction.execute();
+
+        Transaction lateServiceChargeTransaction = new AddServiceChargeTransaction(memberId, previousPayDate, 100.0);
+        lateServiceChargeTransaction.execute();
+
+        Transaction earlyServiceChargeTransaction = new AddServiceChargeTransaction(memberId, nextPayDate, 200.0);
+        earlyServiceChargeTransaction.execute();
+
+        Transaction addTimeCardTransaction = new AddTimeCardTransaction(payDate, 8.0, employeeId);
+        addTimeCardTransaction.execute();
+
+        PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+        paydayTransaction.execute();
+
+        PayCheck payCheck = paydayTransaction.getPaycheck(employeeId);
+        assertThat(payCheck.getPayPeriodEnd(), is(payDate));
+        assertThat(payCheck.getGrossPay(), is(closeTo(8 * hourlyRate, FLOAT_ACCURACY)));
+        assertThat("Hold", is(payCheck.getField("Disposition")));
+        assertThat(payCheck.getDeductions(), is(closeTo(weeklyUnionDues + serviceCharge, FLOAT_ACCURACY)));
+        assertThat(payCheck.getNetPay(), is(closeTo(8 * hourlyRate - (weeklyUnionDues + serviceCharge), FLOAT_ACCURACY)));
+    }
 
     private void validateHourlyPaycheck(PaydayTransaction paydayTransaction, int employeeId, Calendar payDate,
                                         double expectedGross, double expectedDeductions) {
