@@ -5,7 +5,6 @@ import org.junit.Test;
 import payrollcasestudy.DatabaseResource;
 import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.transactions.add.*;
-//import payrollcasestudy.transactions.change.ChangeMemberTransaction;
 import payrollcasestudy.transactions.change.ChangeMemberTransaction;
 
 import java.util.Calendar;
