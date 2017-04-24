@@ -29,6 +29,10 @@ public class UnionAffiliation {
 		this.serviceCharge = serviceCharge;
 	}
 	
+	public int getNumberId()
+	{
+		return numberId;
+	}
 
 	
 	

@@ -47,4 +47,16 @@ public class PayrollDatabase {
     public Set<Integer> getAllEmployeeIds() {
         return employees.keySet();
     }
+    
+    public void changeNullUnionAffilliationAEmployee(int employeeId)
+    {
+    	int memberId = employees.get(employeeId).getUnionAffiliation().getNumberId();
+    	employees.get(employeeId).setUnionAffiliation(null);
+    
+    	
+    }
+    
+    
+    
+    
 }
