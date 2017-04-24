@@ -79,7 +79,7 @@ public class Employee {
     }
 
 	public UnionAffiliation getUnionAffiliation() {
-		// TODO Auto-generated method stu
+		// TODO Auto-generated method stub
 		return unionAffiliation;
 	}
 

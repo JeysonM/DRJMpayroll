@@ -38,7 +38,7 @@ public class AddServiceChargeTransactionTest {
         assertThat(database.getInstance().getUnionMember(memberId), is(notNullValue()));
 
         Calendar date = new GregorianCalendar(2001, 11, 01);
-        AddServiceChargeTransaction addServiceChargeTransaction = new AddServiceChargeTransaction(memberId,date,12.5);
+        AddServiceChargeTransaction addServiceChargeTransaction = new AddServiceChargeTransaction(memberId,date,12.95);
         addServiceChargeTransaction.execute();
         ServiceCharge serviceCharge = unionAffiliation.getServiceCharge(date);
         assertThat(serviceCharge, is(notNullValue()));
