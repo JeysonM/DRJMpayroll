@@ -3,6 +3,7 @@ package payrollcasestudy.transactions.change;
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.ServiceCharge;
+import payrollcasestudy.entities.affiliations.UnionAffiliation;
 import payrollcasestudy.transactions.Transaction;
 
 public class ChangeNoMemberTransaction extends ChangeEmployeeTransaction {
@@ -16,7 +17,7 @@ public class ChangeNoMemberTransaction extends ChangeEmployeeTransaction {
 	@Override
 	public void changeEmployee(Employee employee) {
 		int memberId = employee.getUnionAffiliation().getNumberId();
-		employee.setUnionAffiliation(null);
+		employee.setUnionAffiliation(UnionAffiliation.NO_AFFILIATION);
 		database.deleteUnionMember(memberId);
 	}
 

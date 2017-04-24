@@ -20,6 +20,7 @@ public class Employee {
         this.employeeId = employeeId;
         this.name = name;
         this.address = address;
+        unionAffiliation = UnionAffiliation.NO_AFFILIATION;
         
     }
 
@@ -73,9 +74,10 @@ public class Employee {
 
     public void payDay(PayCheck payCheck) {
         double grossPay = paymentClassification.calculatePay(payCheck);
-        double netPay = grossPay;
+        double netPay = grossPay - (5*unionAffiliation.getDues());
         payCheck.setGrossPay(grossPay);
         payCheck.setNetPay(netPay);
+        payCheck.setDeductions(5*unionAffiliation.getDues());
         paymentMethod.pay(payCheck);
     }
 

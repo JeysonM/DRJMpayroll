@@ -10,7 +10,7 @@ public class UnionAffiliation {
 	private int numberId;
 	private double amount;
 	private ServiceCharge serviceCharge;
-	public static final UnionAffiliation NO_AFFILIATION = null;
+	public static final UnionAffiliation NO_AFFILIATION = new UnionAffiliation(0,0);
 	
 	public UnionAffiliation(int numberId, double amount){
 		this.numberId = numberId;
