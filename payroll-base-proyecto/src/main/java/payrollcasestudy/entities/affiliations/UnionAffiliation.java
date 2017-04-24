@@ -34,6 +34,10 @@ public class UnionAffiliation {
 		return numberId;
 	}
 
+	public Double getDues() {
+		return amount;
+	}
+
 	
 	
 	
