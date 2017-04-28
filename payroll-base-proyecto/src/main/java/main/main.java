@@ -8,10 +8,11 @@ import spark.Route;
 public class Main {
 	public static void main(String[] args) {
 		get("/", (request, response) -> hola());
+		
 		post("/hola", (request, response) -> responder_saludo(request.queryParams("nombre_saludo") ));
 		get("/employee", (request, response) -> viewCreateEmployee());
 		post("/new", (request, response) -> createEmployee(request.queryParams("id"),request.queryParams("name"),request.queryParams("address")));
-		get("/Arquitectura", (request, response) -> "Hola Arquitectura");
+		get("/employees", (request, response) -> showEmployee());
 	}
 
 
@@ -56,5 +57,10 @@ public class Main {
         return "Exito al crear";
 	}
 	
-	
+	private static String showEmployee() {
+		int employeeId=1;
+		Employee employee;
+		employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+        return employee.getName().toString()+ " - " + employee.getAddress();
+	}
 }
