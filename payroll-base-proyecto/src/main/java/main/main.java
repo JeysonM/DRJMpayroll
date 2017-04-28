@@ -10,7 +10,7 @@ import spark.Route;
 
 public class Main {
 	public static void main(String[] args) {
-		get("/", (request, response) -> hola());
+		get("/", (request, response) -> root());
 		
 		//post("/hola", (request, response) -> responder_saludo(request.queryParams("nombre_saludo") ));
 		get("/employees/new", (request, response) -> EmployeeView.formCreateEmployee());
@@ -18,20 +18,11 @@ public class Main {
 		get("/employees", (request, response) -> EmployeeView.showEmployee());
 	}
 
-
-
-	private static String responder_saludo(String nombre) {
-		System.out.println("----------RESPONDIENDO---------");
-		return "Hola "+nombre;
-	}
 	
-	private static String hola() {
+	private static String root() {
 		return "<html>"
 				+ "<body>"
-				+ "<form method='post' action='/hola'>" 
-				+ "<label>Nombre:</label>"
-				+ "<input type='text' name='nombre_saludo'>"
-				+ "<input type='submit' value='Saluda'"
+				+ "<h1>Pagina de Inicio</h1>" 
 				+ "</body>"
 				+ "</html>";
 		
