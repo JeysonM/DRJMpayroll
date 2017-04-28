@@ -5,13 +5,42 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
   </head>
   <body>
-   "<form method='post' action='/create'> 
-				<label>ID:</label>
-				<input type='number' name='id'>
-				<label>Nombre:</label>
-				<input type='text' name='name'>
-				<label>Direccion:</label>
-				<input type='text' name='address'>
-				<input type='submit' value='crear'>
+  	<div class="container">
+  	
+
+	  	<div class="row">
+	  	  <div class="col-xs-13 col-md-7">
+	  	  		<h1 class"">Registrar Empleado</h1>
+	  	  		
+	  	  		<hr />
+	  	  </div>
+	  	  
+	  	  
+	  	  
+		  <div class="col-xs-12 col-md-8">
+		  		<form method='post' action='/create'>
+				  <div class="form-group">
+				    <label for="">Id</label>
+				    <input type="number" name="id" class="form-control" id="" placeholder="employeeId">
+				  </div>
+				  <div class="form-group">
+				    <label for="">Nombre</label>
+				    <input type="text" name="name" class="form-control" id="" placeholder="Nombre completo">
+				  </div>
+				  <div class="form-group">
+				    <label for="">Dirección</label>
+				    <input type="text" name='address' class="form-control" id="" placeholder="Av. Ejemplo">
+				  </div>
+				  
+				  <button type="submit" class="btn btn-success">Registrar</button>
+				</form>
+		  </div>
+		  
+		</div>
+	
+	
+  	</div>
+   	
+	
   </body>
 </html>
