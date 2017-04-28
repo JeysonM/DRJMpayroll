@@ -15,7 +15,7 @@ public class Main {
 		//post("/hola", (request, response) -> responder_saludo(request.queryParams("nombre_saludo") ));
 		get("/employees/new", (request, response) -> EmployeeView.formCreateEmployee());
 		post("/create", (request, response) -> EmployeeView.createNewEmployee(request.queryParams("id"),request.queryParams("name"),request.queryParams("address")));
-		get("/employees", (request, response) -> EmployeeView.showEmployee());
+		get("/employees", (request, response) -> EmployeeView.showAllEmployees());
 	}
 
 	
