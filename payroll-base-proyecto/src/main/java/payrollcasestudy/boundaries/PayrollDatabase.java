@@ -48,6 +48,11 @@ public class PayrollDatabase {
         return employees.keySet();
     }
     
+    public List<Employee> getEmployees()
+    {
+    	return (List<Employee>) employees.values();
+    }
+    
     
     
     
