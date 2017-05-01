@@ -48,11 +48,12 @@ public class PayrollDatabase {
         return employees.keySet();
     }
     
+    
     public List<Employee> getEmployees()
     {
-    	return (List<Employee>) employees.values();
+        List<Employee> employeesList = new ArrayList<>(employees.values());
+        return employeesList;
     }
-    
     
     
     

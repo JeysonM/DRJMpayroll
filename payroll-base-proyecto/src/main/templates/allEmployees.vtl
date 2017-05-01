@@ -6,10 +6,14 @@
   </head>
   <body>
   	<h1>Empleados</h1>
+  	
+  	<h1>${}</h1>
+  	
+  	
   	<ul>
-	#foreach($employee in $Employees)
-    	<li>${employee}</li>
-	#end
+	  #foreach( $employee in $employees )
+	    <li>${employee.getName().toString()}</li>
+	  #end
 	</ul>
   </body>
 </html>

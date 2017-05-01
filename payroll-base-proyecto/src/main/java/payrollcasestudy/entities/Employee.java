@@ -43,6 +43,10 @@ public class Employee {
     public String getName() {
         return name;
     }
+    
+    public int getEmployeeId() {
+        return employeeId;
+    }
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;

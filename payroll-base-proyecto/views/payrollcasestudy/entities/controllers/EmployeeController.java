@@ -1,6 +1,8 @@
 package payrollcasestudy.entities.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -20,8 +22,16 @@ public class EmployeeController {
 	
 	//all methods of crud
 	
+		
 	public static List<Employee> showAllEmployees() {
-		return PayrollDatabase.globalPayrollDatabase.getEmployees();	
+		return PayrollDatabase.globalPayrollDatabase.getEmployees();
+	
 	}
+	
+	public static Employee showEmployee(int employeeId) {
+		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+	}
+
+	
 
 }
