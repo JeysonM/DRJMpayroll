@@ -1,9 +1,14 @@
 package payrollcasestudy.entities;
 
 import payrollcasestudy.entities.affiliations.UnionAffiliation;
+import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
+import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
+import payrollcasestudy.entities.paymentclassifications.SalariedClassification;
 import payrollcasestudy.entities.paymentmethods.PaymentMethod;
 import payrollcasestudy.entities.paymentschedule.PaymentSchedule;
+import payrollcasestudy.transactions.Transaction;
+import payrollcasestudy.transactions.add.AddHourlyEmployeeTransaction;
 
 import java.util.Calendar;
 
@@ -26,6 +31,31 @@ public class Employee {
 
     public PaymentClassification getPaymentClassification() {
         return paymentClassification;
+    }
+    
+    public boolean isHourlyPaymentClassification() {
+    	boolean typePayment=false;
+    	if(paymentClassification instanceof  HourlyPaymentClassification){
+    		typePayment=true;
+    	}
+        return typePayment;
+    }
+    
+    
+    public boolean isCommissionedPaymentClassification() {
+    	boolean typePayment=false;
+    	if(paymentClassification instanceof  CommissionedPaymentClassification){
+    		typePayment=true;
+    	}
+        return typePayment;
+    }
+    
+    public boolean isSalariedClassification() {
+    	boolean typePayment=false;
+    	if(paymentClassification instanceof  SalariedClassification){
+    		typePayment=true;
+    	}
+        return typePayment;
     }
 
     public void setPaymentClassification(PaymentClassification paymentClassification) {

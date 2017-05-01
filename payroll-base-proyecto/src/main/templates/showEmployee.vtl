@@ -16,10 +16,31 @@
 	  		<h3>CI: ${employee.getEmployeeId()}</h3>
 		   	<h3>Nombre: ${employee.getName()}</h3>
 		   	<h3>Dirección: ${employee.getAddress()}</h3>
-  		</div>
+  		</div><br>
   		
-  		<hr />
+  		#if	(${employee.isHourlyPaymentClassification()})
+  			<div class="row">
+  			<h2>Pago por hora<h2><hr />
+  			<h3>Monto Hora: ${employee.getPaymentClassification().getHourlyRate()}</h3>
   		<br>
+  		</div>
+  		#end
+  		#if	(${employee.isCommissionedPaymentClassification()})
+  			<div class="row">
+  			<h2>Pago por comisión<h2><hr />
+  			<h3>Monto Semanal: ${employee.getPaymentClassification().getMonthlySalary()}</h3>
+  			<h3>Comisión: ${employee.getPaymentClassification().getCommissionRate()}</h3>
+  		<br>
+  		</div>
+  		#end
+  		#if	(${employee.isSalariedClassification()})
+  			<div class="row">
+  			<h2>Salario Fijo<h2><hr />
+  			<h3>Salario: ${employee.getPaymentClassification().getSalary()}</h3>
+  		<br>
+  		</div>
+  		#end
+  		
   		<div class="row">
 	  		<a href="/employees" class=" ">
 		  		<h4>Atrás</h4></a>
