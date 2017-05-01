@@ -5,24 +5,27 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
   </head>
   <body>
-    <!--It's useful to put a comment at the top of your vtl file to help you keep track of what is what when things get more complex.-->
-    <h1>Pagina de Inicio</h1>
-    <p>Dear Friend,</p>
-    <p>How are you? I hope that you are having a nice weekend. I'm vacationing in Iceland while I learn programming! </p>
-    <p>Friend, you would not believe how cold it is here. I should have gone to Hawaii instead.</p>
-    <p>But I like programming a lot, so I've got that going for me. </p>
-    <p>Looking forward to seeing you soon. I'll bring you back a souvenir. </p>
-    <p>Cheers,</p>
-    <p>Travel Enthusiast Jane</p>
-    <p><a href='/favorite_photos' >P.S. Check out my favorite travel photos here.</a></p>
+  	<div class="container">
+  	
+  		<!--It's useful to put a comment at the top of your vtl file to help you keep track of what is what when things get more complex.-->
+	    <h1>Pagina de Inicio</h1>
+	    <p>Dear Friend,</p>
+	    <p>How are you? I hope that you are having a nice weekend. I'm vacationing in Iceland while I learn programming! </p>
+	    <p>Friend, you would not believe how cold it is here. I should have gone to Hawaii instead.</p>
+	    <p>But I like programming a lot, so I've got that going for me. </p>
+	    <p>Looking forward to seeing you soon. I'll bring you back a souvenir. </p>
+	    <p>Cheers,</p>
+	    <p>Travel Enthusiast Jane</p>
+	    <p><a href='/favorite_photos' >P.S. Check out my favorite travel photos here.</a></p>
+	    <div class="row">
+		  		<a href="/employees" class="btn btn-primary btn-lg btn-block">
+			  		<h4>Ingresar al Sistema</h4></a>
+	  	</div>
+  	
+  	</div>
     
-    <h1>${word}</h1>
     
-    <ul>
-	  #foreach( $product in $allProducts )
-	    <li>$product</li>
-	  #end
-	</ul>
+   
     
   </body>
 </html>
