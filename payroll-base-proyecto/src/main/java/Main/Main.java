@@ -47,7 +47,7 @@ public class Main {
             return new ModelAndView(view, "newEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
-		get("/showEmployee/:id", (request, response) -> {
+		get("/employees/show/:id", (request, response) -> {
 			Employee employee;
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
 			view.put("employee", employee);
