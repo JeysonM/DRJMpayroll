@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registrar Empleado</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  </head>
+  <body>
+  	<div class="container">
+  	
+
+	  	<div class="row">
+	  	  <div class="col-xs-13 col-md-7">
+	  	  		<h1 class"">Registrar Empleado</h1>
+	  	  		
+	  	  		<hr />
+	  	  </div>
+	  	  
+	  	  
+	  	  
+		  <div class="col-xs-12 col-md-8">
+		  		<form method='post' action='/createSalaried'>
+				  <div class="form-group">
+				    <label for="">CI</label>
+				    <input type="number" name="id" class="form-control" id="" placeholder="Número de carnet de identidad">
+				  </div>
+				  <div class="form-group">
+				    <label for="">Nombre:</label>
+				    <input type="text" name="name" class="form-control" id="" placeholder="Nombre Completo">
+				  </div>
+				  <div class="form-group">
+				    <label for="">Dirección:</label>
+				    <input type="text" name='address' class="form-control" id="" placeholder="Av. Ejemplo">
+				  </div>
+				  <div class="form-group">
+				    <label for="">Sueldo:</label>
+				    <input type="number" step="0.01" name='salaried' class="form-control" id="" placeholder="0.00">
+				  </div>
+				  <hr />
+				  <button type="submit" class="btn btn-success">Registrar</button>
+				</form>
+		  </div>
+		  
+		</div>
+		
+		<br><br><br><br><br>
+	  	<div class="row">
+		  		<a href="/employees" class=" ">
+		  		<h4>Atrás</h4></a>
+		</div>
+			
+
+  	</div>
+  </body>
+  
+</html>

@@ -35,19 +35,46 @@ public class Main {
 			return new ModelAndView(view, "allEmployees.vtl");
 		}, new VelocityTemplateEngine());
 		
-		get("/employees/new", (request, response) -> {
+		get("/employees/newHourly", (request, response) -> {
 			
-            return new ModelAndView(view, "newEmployee.vtl");
+            return new ModelAndView(view, "newEmployeeHourly.vtl");
         }, new VelocityTemplateEngine());
 		
-		post("/create", (request, response) -> {
+		get("/employees/newSalaried", (request, response) -> {
 			
-			EmployeeController.createNewEmployee(request.queryParams("id"),
-					request.queryParams("name"),request.queryParams("address"));
+            return new ModelAndView(view, "newEmployeeSalaried.vtl");
+        }, new VelocityTemplateEngine());
+		
+		get("/employees/newCommissioned", (request, response) -> {
+			
+            return new ModelAndView(view, "newEmployeeCommissioned.vtl");
+        }, new VelocityTemplateEngine());
+		
+		post("/createHourly", (request, response) -> {
+			
+			EmployeeController.createNewEmployeeHourly(request.queryParams("id"),
+					request.queryParams("name"),request.queryParams("address"), request.queryParams("hourly"));
 			response.redirect("/employees");
             return new ModelAndView(view, "allEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
+		post("/createSalaried", (request, response) -> {
+			
+			EmployeeController.createNewEmployeeSalaried(request.queryParams("id"),
+					request.queryParams("name"),request.queryParams("address"), request.queryParams("salaried"));
+			response.redirect("/employees");
+            return new ModelAndView(view, "allEmployee.vtl");
+        }, new VelocityTemplateEngine());
+		
+		post("/createCommissioned", (request, response) -> {
+			
+			EmployeeController.createNewEmployeeCommissioned(request.queryParams("id"),
+					request.queryParams("name"),request.queryParams("address"), request.queryParams("salaried"),
+					request.queryParams("rate"));
+			response.redirect("/employees");
+            return new ModelAndView(view, "allEmployee.vtl");
+        }, new VelocityTemplateEngine());
+
 		get("/employees/show/:id", (request, response) -> {
 			Employee employee;
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
