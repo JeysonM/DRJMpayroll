@@ -1,4 +1,4 @@
-package payrollcasestudy.entities.controllers;
+package payrollcasestudy.transactions.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;

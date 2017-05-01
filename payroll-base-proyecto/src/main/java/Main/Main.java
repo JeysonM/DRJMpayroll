@@ -9,7 +9,7 @@ import java.util.List;
 
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
-import payrollcasestudy.entities.controllers.EmployeeController;
+import payrollcasestudy.transactions.controllers.EmployeeController;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
