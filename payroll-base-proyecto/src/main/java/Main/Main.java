@@ -44,7 +44,8 @@ public class Main {
 			
 			EmployeeController.createNewEmployee(request.queryParams("id"),
 					request.queryParams("name"),request.queryParams("address"));
-            return new ModelAndView(view, "newEmployee.vtl");
+			response.redirect("/employees");
+            return new ModelAndView(view, "allEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
 		get("/employees/show/:id", (request, response) -> {

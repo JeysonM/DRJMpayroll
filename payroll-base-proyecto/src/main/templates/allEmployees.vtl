@@ -10,14 +10,14 @@
   			<h1>Empleados</h1>
 		  	<hr />
 		  	<br><br>
-		  	<table class="table table-striped">
+		  	<table class="table table-hover">
 		  		<thead>
 		  			<th>CI</th>
 		  			<th>Nombre</th>
 		  			<th>Direccion</th>
 		  			<th>Detalle</th>
 		  		</thead>
-		  		<tbody >
+		  		<tbody class="table table-hover">
 		  			#foreach( $employee in $employees )
 		  				<tr>
 				  			<td>${employee.getEmployeeId().toString()}</td>
