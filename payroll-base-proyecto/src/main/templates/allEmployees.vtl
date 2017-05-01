@@ -5,15 +5,42 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
   </head>
   <body>
-  	<h1>Empleados</h1>
-  	
-  	<h1>${}</h1>
-  	
-  	
-  	<ul>
-	  #foreach( $employee in $employees )
-	    <li>${employee.getName().toString()}</li>
-	  #end
-	</ul>
+  	<div class="container">
+  		<div class="row">
+  			<h1>Empleados</h1>
+		  	<hr />
+		  	<br><br>
+		  	<table class="table table-striped">
+		  		<thead>
+		  			<th>CI</th>
+		  			<th>Nombre</th>
+		  			<th>Direccion</th>
+		  			<th>Detalle</th>
+		  		</thead>
+		  		<tbody >
+		  			#foreach( $employee in $employees )
+		  				<tr>
+				  			<td>${employee.getEmployeeId().toString()}</td>
+				  			<td>${employee.getName().toString()}</td>
+				  			<td>${employee.getAddress().toString()}</td>
+				  			<td><a href="employees/show/${employee.getEmployeeId()}" >Ver Detalle</a></td>
+			  			<tr>
+		  			#end
+		  		</tbody>
+		  	</table>
+  		</div>
+	  	<br><br>
+	  	<div class="row">
+	  		
+	  		<a href="employees/new" class="btn btn-success ">
+		  		Añadir nuevo <i class="glyphicon glyphicon-plus"></i></a>
+  		</div>
+	  		
+	  	
+	  	
+	  	
+	  	
+  	</div>
+
   </body>
 </html>
