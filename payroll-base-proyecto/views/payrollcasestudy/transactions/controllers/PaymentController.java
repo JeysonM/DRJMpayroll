@@ -9,9 +9,9 @@ import payrollcasestudy.transactions.add.AddSalesReceiptTransaction;
 import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
 public class PaymentController {
-	private Transaction paymentTransaction;
+	private static Transaction paymentTransaction;
 	
-	public void createPaymentForHourly(String year, String month, String day, String hours, String employeeId)
+	public static void createPaymentForHourly(String year, String month, String day, String hours, String employeeId)
 	{
 		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
 		paymentTransaction = new AddTimeCardTransaction(date, Double.parseDouble(hours),Integer.parseInt(employeeId));

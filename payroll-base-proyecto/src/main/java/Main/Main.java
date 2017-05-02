@@ -10,6 +10,7 @@ import java.util.List;
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.transactions.controllers.EmployeeController;
+import payrollcasestudy.transactions.controllers.PaymentController;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -74,7 +75,16 @@ public class Main {
 			response.redirect("/employees");
             return new ModelAndView(view, "allEmployee.vtl");
         }, new VelocityTemplateEngine());
-
+		
+		post("/payHourly", (request, response) -> {
+			
+			PaymentController.createPaymentForHourly(request.queryParams("year"),
+					request.queryParams("month"),request.queryParams("day"), request.queryParams("hours"),
+					request.queryParams("employeeId"));
+			response.redirect("/employees");
+            return new ModelAndView(view, "allEmployee.vtl");
+        }, new VelocityTemplateEngine());
+		
 		get("/employees/show/:id", (request, response) -> {
 			Employee employee;
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
