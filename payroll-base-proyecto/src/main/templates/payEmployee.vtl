@@ -21,34 +21,8 @@
   		#if	(${employee.isHourlyPaymentClassification()})
   			<div class="row">
   			<h2>Pago Por Hora<h2><hr />
-  			<h3>Monto Hora: ${employee.getPaymentClassification().getHourlyRate()}</h3>
+  			<h3>Total: ${total}</h3>
   			
-  			
-  			<form method='post' action='/payHourly'>
-  			<div class="row">
-  				<div class="col-md-4">
-  					<label for="">Día:</label>
-				    <input type="number" name="day" class="form-control" id="" placeholder="1-31">
-  				</div>
-  				<div class="col-md-4">
-  					<label for="">Mes:</label>
-				    <input type="number" name="month" class="form-control" id="" placeholder="1-12">
-  				</div>
-  				<div class="col-md-4">
-  					<label for="">Año:</label>
-				    <input type="number" name="year" class="form-control" id="" placeholder="Ej: 2005">
-  				</div>
-  				<div class="col-md-4">
-  					<label for="">Horas:</label>
-				    <input type="number" name="hours" class="form-control" id="" placeholder="">
-  				</div>
-  				<div class="col-md-4">
-				    <input type="hidden" value="${employee.getEmployeeId()}" name="employeeId">
-  				</div>
-			</div>
-			</br>
-			<button type="submit" class="btn btn-warning">  Registrar Horas  </button>
-  			</form>
   		<br>
   		</div>
   		#end

@@ -4,11 +4,14 @@ import static spark.Spark.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
+import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.transactions.controllers.EmployeeController;
 import payrollcasestudy.transactions.controllers.PaymentController;
 import spark.ModelAndView;
@@ -90,6 +93,18 @@ public class Main {
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
 			view.put("employee", employee);
             return new ModelAndView(view, "showEmployee.vtl");
+        }, new VelocityTemplateEngine());
+		
+		get("/pay/show/:id", (request, response) -> {
+			Employee employee;
+			PayCheck payCheck;
+			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
+			PaymentController.calculateAllPays("16","6","2017");
+			payCheck = PaymentController.getTransaccion(request.params(":id"));
+			double total = employee.getPaymentClassification().calculatePay(payCheck);
+			view.put("employee", employee);
+			view.put("total", total);
+            return new ModelAndView(view, "payEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
 	}
