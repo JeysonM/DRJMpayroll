@@ -32,25 +32,15 @@ public class PaymentController {
 		paymentTransaction.execute();
 	}
 	
-	public void createPaymentSalaried(String year, String month, String day)
-	{
-		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
-		paymentTransaction = new PaydayTransaction(date);
-	    paymentTransaction.execute();
-	}
-	
-	public static void calculateAllPays(String year, String month, String day)
+	public static PayCheck calculateAllPays(String year, String month, String day,String employeeId)
 	{
 		Calendar payDate = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
-		paydayTransaction  = new PaydayTransaction(payDate);
-		paydayTransaction.execute();
+		paymentTransaction  = new PaydayTransaction(payDate);
+		paymentTransaction.execute();
+		return ((PaydayTransaction) paymentTransaction).getPaycheck(Integer.parseInt(employeeId));
 		
 	}
 	
-	public static PayCheck getTransaccion(String employeeId){
-		PayCheck payCheck = paydayTransaction.getPaycheck(Integer.parseInt(employeeId));
-		return payCheck;
-	}
 	
 	
 	

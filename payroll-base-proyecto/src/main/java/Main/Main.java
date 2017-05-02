@@ -12,6 +12,8 @@ import java.util.List;
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
+import payrollcasestudy.entities.TimeCard;
+import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
 import payrollcasestudy.transactions.controllers.EmployeeController;
 import payrollcasestudy.transactions.controllers.PaymentController;
 import spark.ModelAndView;
@@ -90,18 +92,20 @@ public class Main {
 		
 		get("/employees/show/:id", (request, response) -> {
 			Employee employee;
+			//Calendar calendar = new GregorianCalendar(2017,6,14);
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
+			
 			view.put("employee", employee);
             return new ModelAndView(view, "showEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
 		get("/pay/show/:id", (request, response) -> {
 			Employee employee;
-			PayCheck payCheck;
+			//Calendar calendar = new GregorianCalendar(2017,6,14);
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
-			PaymentController.calculateAllPays("16","6","2017");
-			payCheck = PaymentController.getTransaccion(request.params(":id"));
-			double total = employee.getPaymentClassification().calculatePay(payCheck);
+			//
+			PayCheck payCheck = PaymentController.calculateAllPays("2017","6","16",request.params(":id"));
+			double total = payCheck.getNetPay();
 			view.put("employee", employee);
 			view.put("total", total);
             return new ModelAndView(view, "payEmployee.vtl");
