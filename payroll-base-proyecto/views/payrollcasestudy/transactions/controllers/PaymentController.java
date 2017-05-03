@@ -25,7 +25,7 @@ public class PaymentController {
 		
 	}
 	
-	public void createPaymentForSalesReceipt(String year, String month, String day, String amount, String employeeId)
+	public static void createPaymentForSalesReceipt(String year, String month, String day, String amount, String employeeId)
 	{
 		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
 		paymentTransaction = new AddSalesReceiptTransaction(date, Double.parseDouble(amount),Integer.parseInt(employeeId));

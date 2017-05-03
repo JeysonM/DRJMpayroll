@@ -94,6 +94,15 @@ public class Main {
             return new ModelAndView(view, "allEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
+		post("/payCommissioned", (request, response) -> {
+			
+			PaymentController.createPaymentForSalesReceipt(request.queryParams("year"),
+					request.queryParams("month"),request.queryParams("day"), request.queryParams("sales"),
+					request.queryParams("employeeId"));
+			response.redirect("/employees");
+            return new ModelAndView(view, "allEmployee.vtl");
+        }, new VelocityTemplateEngine());
+		
 		get("/employees/show/:id", (request, response) -> {
 			Employee employee;
 			//Calendar calendar = new GregorianCalendar(2017,6,14);
