@@ -2,6 +2,8 @@ package payrollcasestudy.transactions.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -9,19 +11,23 @@ import java.util.Set;
 
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
+import payrollcasestudy.entities.PayCheck;
+import payrollcasestudy.transactions.PaydayTransaction;
 import payrollcasestudy.transactions.Transaction;
 import payrollcasestudy.transactions.add.AddCommissionedEmployeeTransaction;
 import payrollcasestudy.transactions.add.AddEmployeeTransaction;
 import payrollcasestudy.transactions.add.AddHourlyEmployeeTransaction;
 import payrollcasestudy.transactions.add.AddSalariedEmployeeTransaction;
+import payrollcasestudy.transactions.add.AddSalesReceiptTransaction;
+import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
 public class EmployeeController {
 	private static Transaction addEmployeeTransaction;
 	
 	public static void createNewEmployeeHourly(String employeeId, String name, String address, String hourlyRate) 
 	{
-		addEmployeeTransaction = new AddHourlyEmployeeTransaction(Integer.parseInt(employeeId),name,
-				address, Double.parseDouble(hourlyRate));       
+		addEmployeeTransaction = new AddHourlyEmployeeTransaction(Integer.parseInt(employeeId), name,
+				address, Double.parseDouble(hourlyRate));
 		addEmployeeTransaction.execute();
 	}
 	
@@ -49,7 +55,4 @@ public class EmployeeController {
 	public static Employee showEmployee(int employeeId) {
 		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
 	}
-
-	
-
 }

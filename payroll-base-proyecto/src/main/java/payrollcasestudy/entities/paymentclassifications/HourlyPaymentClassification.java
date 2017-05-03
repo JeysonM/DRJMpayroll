@@ -5,6 +5,7 @@ import payrollcasestudy.entities.TimeCard;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +24,13 @@ public class HourlyPaymentClassification extends PaymentClassification{
 
     public TimeCard getTimeCard(Calendar date) {
         return timeCardMap.get(date);
+    }
+    
+    public double getFirstTimeCard()
+    {	
+    	Calendar date = new GregorianCalendar(2017,6,14);
+    	TimeCard tm = timeCardMap.get(date);
+       	return tm.getHours();
     }
 
     public void addTimeCard(TimeCard timeCard) {
