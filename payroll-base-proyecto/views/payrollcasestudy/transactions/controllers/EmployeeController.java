@@ -23,19 +23,12 @@ import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
 public class EmployeeController {
 	private static Transaction addEmployeeTransaction;
-	private static Transaction paymentTransaction;
-	private static PaydayTransaction paydayTransaction;
-	
-	public EmployeeController()
-	{
-		
-	}
 	
 	public static void createNewEmployeeHourly(String employeeId, String name, String address, String hourlyRate) 
 	{
-		Transaction addEmployeeTransaction1 = new AddHourlyEmployeeTransaction(Integer.parseInt(employeeId),name,
-				address, Double.parseDouble(hourlyRate));       
-		addEmployeeTransaction1.execute();
+		addEmployeeTransaction = new AddHourlyEmployeeTransaction(Integer.parseInt(employeeId), name,
+				address, Double.parseDouble(hourlyRate));
+		addEmployeeTransaction.execute();
 	}
 	
 	public static void createNewEmployeeSalaried(String employeeId, String name, String address, String salary)
@@ -62,31 +55,4 @@ public class EmployeeController {
 	public static Employee showEmployee(int employeeId) {
 		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
 	}
-	
-	public void createPaymentForHourly(String year, String month, String day, String hours, String employeeId)
-	{
-		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
-		Transaction addTimeCard = new AddTimeCardTransaction(date, Double.parseDouble(hours),Integer.parseInt(employeeId));
-		addTimeCard.execute();
-		
-	}
-	
-	public void createPaymentForSalesReceipt(String year, String month, String day, String amount, String employeeId)
-	{
-		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
-		paymentTransaction = new AddSalesReceiptTransaction(date, Double.parseDouble(amount),Integer.parseInt(employeeId));
-		paymentTransaction.execute();
-	}
-	
-	public static PayCheck calculateAllPays(String year, String month, String day,String employeeId)
-	{
-		Calendar payDate = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
-		paydayTransaction  = new PaydayTransaction(payDate);
-		paydayTransaction.execute();
-		return paydayTransaction.getPaycheck(Integer.parseInt(employeeId));
-		
-	}
-
-	
-
 }
