@@ -23,6 +23,7 @@
   		#if	(${employee.isHourlyPaymentClassification()})
   			<div class="row">
   			<h2>Pago Por Hora<h2><hr />
+  			<h3>Monto Hora: ${employee.getPaymentClassification().getHourlyRate()}</h3>
   			<h3>Total: ${total}</h3>
 
   		<br>

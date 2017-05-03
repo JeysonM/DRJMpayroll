@@ -115,6 +115,12 @@ public class Main {
             return new ModelAndView(view, "payEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
+		post("/payAll", (request, response) -> {
+			
+			
+            return new ModelAndView(view, "allEmployee.vtl");
+        }, new VelocityTemplateEngine());
+		
 	
 	}
 
