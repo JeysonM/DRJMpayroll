@@ -35,9 +35,9 @@ public class PaymentController {
 	public static PayCheck calculateAllPays(String year, String month, String day,String employeeId)
 	{
 		Calendar payDate = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
-		paymentTransaction  = new PaydayTransaction(payDate);
-		paymentTransaction.execute();
-		return ((PaydayTransaction) paymentTransaction).getPaycheck(Integer.parseInt(employeeId));
+		paydayTransaction  = new PaydayTransaction(payDate);
+		paydayTransaction.execute();
+		return paydayTransaction.getPaycheck(Integer.parseInt(employeeId));
 		
 	}
 	
