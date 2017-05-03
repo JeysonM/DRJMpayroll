@@ -117,17 +117,24 @@ public class Main {
 			Employee employee;
 			PayCheck payCheck;
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
-			payCheck = PaymentController.calculateAllPays("2001","10","9",request.params(":id"));
+			payCheck = PaymentController.getPayCheckFromPayDayTransaction((request.params(":id")));
 			double total = payCheck.getNetPay();
 			view.put("employee", employee);
 			view.put("total", total);
             return new ModelAndView(view, "payEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
-		post("/payAll", (request, response) -> {
+		get("/payAll", (request, response) -> {
 			
+            return new ModelAndView(view, "payAll.vtl");
+        }, new VelocityTemplateEngine());
+		
+		post("/payAllTransaction", (request, response) -> {
+			PaymentController.calculateAllPays(request.queryParams("year"),
+					request.queryParams("month"),request.queryParams("day"));
 			
-            return new ModelAndView(view, "allEmployee.vtl");
+			response.redirect("/employees");
+            return new ModelAndView(view, "allEmployees.vtl");
         }, new VelocityTemplateEngine());
 		
 	

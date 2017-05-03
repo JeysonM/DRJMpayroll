@@ -33,13 +33,16 @@
   			<div class="row">
   			<h2>Pago por comisión<h2><hr />
   			<h3>Monto Semanal: ${employee.getPaymentClassification().getMonthlySalary()}</h3>
-  			<h3>Comisión: ${payCheck.getNetPay()}</h3>
+  			<h3>Comisión: ${employee.getPaymentClassification().getCommissionRate()}</h3>
+  			<h3>Total: ${total}</h3>
+  			
   		<br>
   		</div>
   		#end
   		#if	(${employee.isSalariedClassification()})
   			<div class="row">
   			<h2>Salario Fijo<h2><hr />
+  			<h3>Salario: ${employee.getPaymentClassification().getSalary()}</h3>
   			<h3>Total: ${total}</h3>
   		<br>
   		</div>
