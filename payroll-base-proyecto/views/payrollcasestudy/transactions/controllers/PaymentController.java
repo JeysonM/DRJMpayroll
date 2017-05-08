@@ -19,7 +19,7 @@ public class PaymentController {
 	
 	public static void createPaymentForHourly(String year, String month, String day, String hours, String employeeId)
 	{
-		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
+		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
 		paymentTransaction = new AddTimeCardTransaction(date, Double.parseDouble(hours),Integer.parseInt(employeeId));
 		paymentTransaction.execute();
 		
@@ -27,14 +27,14 @@ public class PaymentController {
 	
 	public static void createPaymentForSalesReceipt(String year, String month, String day, String amount, String employeeId)
 	{
-		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
+		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
 		paymentTransaction = new AddSalesReceiptTransaction(date, Double.parseDouble(amount),Integer.parseInt(employeeId));
 		paymentTransaction.execute();
 	}
 	
 	public static void calculateAllPays(String year, String month, String day)
 	{
-		Calendar payDate = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
+		Calendar payDate = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
 		paydayTransaction  = new PaydayTransaction(payDate);
 		paydayTransaction.execute();
 		
