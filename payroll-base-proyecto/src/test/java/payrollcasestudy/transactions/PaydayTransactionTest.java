@@ -3,6 +3,8 @@ package payrollcasestudy.transactions;
 import org.junit.Rule;
 import org.junit.Test;
 import payrollcasestudy.DatabaseResource;
+import payrollcasestudy.boundaries.MemoryDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.transactions.add.*;
 import payrollcasestudy.transactions.change.ChangeMemberTransaction;
@@ -22,6 +24,7 @@ public class PaydayTransactionTest {
 
     @Rule
     public DatabaseResource databaseResource = new DatabaseResource();
+    public Repository repository = new MemoryDatabase();
     private final GregorianCalendar THURSDAY = new GregorianCalendar(2001, 10, 8);
     private final GregorianCalendar FRIDAY = new GregorianCalendar(2001, 10, 9);
 
