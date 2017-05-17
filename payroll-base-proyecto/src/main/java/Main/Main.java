@@ -34,7 +34,8 @@ public class Main {
 		
 		get("/", (request, response) -> {
 			
-		      return new ModelAndView(view, "indexEmployee.vtl");
+			  view.put("template","indexEmployee.vtl");
+		      return new ModelAndView(view, "layout.vtl");
 		    }, new VelocityTemplateEngine());
 		
 		get("/employees", (request, response) -> {
@@ -42,22 +43,23 @@ public class Main {
 			List<Employee> employees = new ArrayList<>();
 			employees = EmployeeController.showAllEmployees();
 			view.put("employees", employees);
-			return new ModelAndView(view, "allEmployees.vtl");
+			view.put("template","allEmployees.vtl");
+			return new ModelAndView(view, "layout.vtl");
 		}, new VelocityTemplateEngine());
 		
 		get("/employees/newHourly", (request, response) -> {
-			
-            return new ModelAndView(view, "newEmployeeHourly.vtl");
+			view.put("template","newEmployeeHourly.vtl");
+            return new ModelAndView(view, "layout.vtl");
         }, new VelocityTemplateEngine());
 		
 		get("/employees/newSalaried", (request, response) -> {
-			
-            return new ModelAndView(view, "newEmployeeSalaried.vtl");
+			view.put("template","newEmployeeSalaried.vtl");
+            return new ModelAndView(view, "layout.vtl");
         }, new VelocityTemplateEngine());
 		
 		get("/employees/newCommissioned", (request, response) -> {
-			
-            return new ModelAndView(view, "newEmployeeCommissioned.vtl");
+			view.put("template","newEmployeeCommissioned.vtl");
+            return new ModelAndView(view, "layout.vtl");
         }, new VelocityTemplateEngine());
 		
 		post("/createHourly", (request, response) -> {
@@ -109,7 +111,8 @@ public class Main {
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
 			
 			view.put("employee", employee);
-            return new ModelAndView(view, "showEmployee.vtl");
+			view.put("template","showEmployee.vtl");
+            return new ModelAndView(view, "layout.vtl");
         }, new VelocityTemplateEngine());
 		
 		get("/pay/show/:id", (request, response) -> {
@@ -121,12 +124,13 @@ public class Main {
 			double total = payCheck.getNetPay();
 			view.put("employee", employee);
 			view.put("total", total);
-            return new ModelAndView(view, "payEmployee.vtl");
+			view.put("template","payEmployee.vtl");
+            return new ModelAndView(view, "layout.vtl");
         }, new VelocityTemplateEngine());
 		
 		get("/payAll", (request, response) -> {
-			
-            return new ModelAndView(view, "payAll.vtl");
+			view.put("template","payAll.vtl");
+            return new ModelAndView(view, "layout.vtl");
         }, new VelocityTemplateEngine());
 		
 		post("/payAllTransaction", (request, response) -> {
