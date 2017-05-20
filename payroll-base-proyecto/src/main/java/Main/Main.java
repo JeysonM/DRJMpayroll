@@ -9,7 +9,9 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
+import payrollcasestudy.boundaries.ConnectionMySQL;
 import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.entities.TimeCard;
@@ -31,6 +33,10 @@ public class Main {
 	public static void main(String[] args) {
 		//staticFileLocation("/public");
 		HashMap<String,Object> view = new HashMap<String,Object>();
+		//ConnectionMySQL myconnection = new ConnectionMySQL();
+		//Repository repository = myconnection;
+		//System.out.println(myconnection.getStatusConnection());
+		//myconnection.viewEmployeeRosqueteDB_test();
 		
 		get("/", (request, response) -> {
 			

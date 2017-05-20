@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import payrollcasestudy.boundaries.ConnectionMySQL;
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
@@ -49,6 +50,7 @@ public class EmployeeController {
 		
 	public static List<Employee> showAllEmployees() {
 		return PayrollDatabase.globalPayrollDatabase.getEmployees();
+		//return ConnectionMySQL.relationalDatabase.getEmployees();
 	
 	}
 	
