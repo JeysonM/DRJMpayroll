@@ -29,40 +29,6 @@ public class ConnectionMySQL implements Repository{
 		
 	}
 	
-	public void viewEmployeeRosqueteDB_test() {
-		try{
-			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
-			String query = "SELECT * FROM rosquete_db.employee";
-			Statement stmt = (Statement) connection.createStatement();
-			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
-			
-			while(rs.next()){
-				System.out.println("CI: "+rs.getString("ci_employee") +" Name: "+rs.getString("first_name") +" Direccion: "+rs.getString("address"));
-				
-			}
-		}catch (Exception e){
-			System.err.println(e);
-		}
-		
-	}
-	
-	public void viewActorDBsakila_test() {
-		try{
-			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
-			String query = "SELECT * FROM rosquete_db.employee";
-			Statement stmt = (Statement) connection.createStatement();
-			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
-			
-			while(rs.next()){
-				System.out.println("Name: "+rs.getString("first_name") +" Last Name: "+rs.getString("last_name"));
-				
-			}
-		}catch (Exception e){
-			System.err.println(e);
-		}
-		
-	}
-
 	@Override
 	public void addEmployee(int employeeId, Employee employee) {
 		// TODO Auto-generated method stub
