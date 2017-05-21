@@ -14,7 +14,6 @@ public class MemoryDatabase implements Repository{
     private Map<Integer, Employee> employees = new HashMap<Integer, Employee>();
     public Map<Integer, Employee> unionMembers = new HashMap<Integer, Employee>();
 
-
     public Employee getEmployee(int employeeId) {
         return employees.get(employeeId);
     }
@@ -43,17 +42,21 @@ public class MemoryDatabase implements Repository{
     public void deleteUnionMember(int memberId) {
         unionMembers.remove(memberId);
     }
-
+    
     public Set<Integer> getAllEmployeeIds() {
         return employees.keySet();
     }
     
-    
     public List<Employee> getEmployees()
     {
-        List<Employee> employeesList = new ArrayList<>(employees.values());
+        List<Employee> employeesList = new ArrayList<Employee>(employees.values());
         return employeesList;
     }
+
+	public Employee getEmployee(Integer employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
     

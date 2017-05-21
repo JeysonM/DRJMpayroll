@@ -1,6 +1,9 @@
 package payrollcasestudy.transactions.delete;
 
+import java.sql.SQLException;
+
 import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.transactions.Transaction;
 
 public class DeleteEmployeeTransaction implements Transaction{
@@ -10,8 +13,7 @@ public class DeleteEmployeeTransaction implements Transaction{
         this.employeeId = employeeId;
     }
 
-    public void execute() {
-        PayrollDatabase database = PayrollDatabase.globalPayrollDatabase;
-        database.deleteEmployee(employeeId);
+    public void execute(Repository repository) throws SQLException {
+        repository.deleteEmployee(employeeId);
     }
 }

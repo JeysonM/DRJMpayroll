@@ -1,8 +1,10 @@
 package payrollcasestudy.transactions.add;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 
 import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.SalesReceipt;
 import payrollcasestudy.entities.ServiceCharge;
@@ -21,9 +23,9 @@ public class AddServiceChargeTransaction implements Transaction {
         this.amount = amount;
     }
 	
-	public void execute(){
+	public void execute(Repository repository) throws SQLException{
 		
-		Employee employee = PayrollDatabase.globalPayrollDatabase.getUnionMember(memberId);
+		Employee employee = repository.getUnionMember(memberId);
 		if(employee != null){
 				employee.getUnionAffiliation().addServiceCharge(date, new ServiceCharge(date, amount));
 		}

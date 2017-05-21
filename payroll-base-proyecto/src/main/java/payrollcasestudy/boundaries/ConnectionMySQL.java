@@ -2,6 +2,7 @@ package payrollcasestudy.boundaries;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -68,5 +69,53 @@ public class ConnectionMySQL implements Repository{
 			return employeesList;
 		}
     }
+
+	@Override
+	public Employee getEmployee(Integer employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Integer> getAllEmployeeIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteUnionMember(int memberId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addUnionMember(int memberId, Employee employee) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Employee getUnionMember(int memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteEmployee(int employeeId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Employee getEmployee(int employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
