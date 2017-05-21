@@ -2,7 +2,6 @@ package payrollcasestudy.transactions.delete;
 
 import java.sql.SQLException;
 
-import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.transactions.Transaction;
 

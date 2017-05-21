@@ -4,7 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import payrollcasestudy.DatabaseResource;
 import payrollcasestudy.boundaries.MemoryDatabase;
-import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.affiliations.UnionAffiliation;
 import payrollcasestudy.transactions.Transaction;
@@ -14,33 +14,31 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class ChangeNoMemberTransactionTest {
-    @Rule
-    public DatabaseResource databaseResource = new DatabaseResource();
-
+    
+	private static final Repository repository = new MemoryDatabase();
+	
     @Test
     public void testChangeMemberTransaction() throws Exception {
-        MemoryDatabase database = databaseResource.getInstance();
-
         int employeeId = 2;
         int memberId = 7734;
         Transaction addEmployeeTransaction =
                 new AddHourlyEmployeeTransaction(employeeId, "Bill", "Home", 15.25);
-        addEmployeeTransaction.execute();
+        addEmployeeTransaction.execute(repository);
 
-        Employee employee = database.getEmployee(employeeId);
+        Employee employee = repository.getEmployee(employeeId);
         UnionAffiliation unionAffiliation = new UnionAffiliation(memberId,92.1);
         employee.setUnionAffiliation(unionAffiliation);
         assertThat(employee.getUnionAffiliation(), is(unionAffiliation));
 
-        database.addUnionMember(memberId, employee);
-        assertThat(database.getUnionMember(memberId), is(employee));
+        repository.addUnionMember(memberId, employee);
+        assertThat(repository.getUnionMember(memberId), is(employee));
 
         Transaction noMemberTransaction = new ChangeNoMemberTransaction(employeeId);
-        noMemberTransaction.execute();
+        noMemberTransaction.execute(repository);
 
-        employee = database.getEmployee(employeeId);
+        employee = repository.getEmployee(employeeId);
         assertThat(employee.getUnionAffiliation(), is(UnionAffiliation.NO_AFFILIATION));
 
-        assertThat(database.getUnionMember(memberId), is(nullValue()));
+        assertThat(repository.getUnionMember(memberId), is(nullValue()));
     }
 }

@@ -30,7 +30,6 @@ public class ConnectionMySQL implements Repository{
 		
 	}
 	
-	@Override
 	public void addEmployee(int employeeId, Employee employee) {
 		// TODO Auto-generated method stub
 		
@@ -52,10 +51,9 @@ public class ConnectionMySQL implements Repository{
 		}
     }
 	
-	@Override
 	public List<Employee> getEmployees()
     {
-		List<Employee> employeesList = new ArrayList<>();
+		List<Employee> employeesList = new ArrayList<Employee>();
 		try{
 			ResultSet results = connectionWithTableOfEmployees();
 			while(results.next()){
@@ -70,49 +68,41 @@ public class ConnectionMySQL implements Repository{
 		}
     }
 
-	@Override
 	public Employee getEmployee(Integer employeeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Set<Integer> getAllEmployeeIds() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void deleteUnionMember(int memberId) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void addUnionMember(int memberId, Employee employee) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public Employee getUnionMember(int memberId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void deleteEmployee(int employeeId) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public Employee getEmployee(int employeeId) {
 		// TODO Auto-generated method stub
 		return null;

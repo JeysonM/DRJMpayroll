@@ -3,7 +3,6 @@ package payrollcasestudy.transactions.add;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.SalesReceipt;

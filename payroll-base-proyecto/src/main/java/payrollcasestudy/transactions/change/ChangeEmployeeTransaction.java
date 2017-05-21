@@ -2,7 +2,6 @@ package payrollcasestudy.transactions.change;
 
 import java.sql.SQLException;
 
-import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.transactions.Transaction;

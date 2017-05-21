@@ -22,8 +22,6 @@ import static payrollcasestudy.TestConstants.*;
 
 public class PaydayTransactionTest {
 	private static final Repository repository = new MemoryDatabase();
-    @Rule
-    public DatabaseResource databaseResource = new DatabaseResource();
     private final GregorianCalendar THURSDAY = new GregorianCalendar(2001, 10, 8);
     private final GregorianCalendar FRIDAY = new GregorianCalendar(2001, 10, 9);
 
