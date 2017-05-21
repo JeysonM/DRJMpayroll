@@ -1,5 +1,6 @@
 package payrollcasestudy.transactions.controllers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import payrollcasestudy.boundaries.ConnectionMySQL;
-import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.transactions.PaydayTransaction;
@@ -23,38 +24,38 @@ import payrollcasestudy.transactions.add.AddSalesReceiptTransaction;
 import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
 public class EmployeeController {
+	private static Repository repository = new ConnectionMySQL();
 	private static Transaction addEmployeeTransaction;
 	
-	public static void createNewEmployeeHourly(String employeeId, String name, String address, String hourlyRate) 
+	public static void createNewEmployeeHourly(String employeeId, String name, String address, String hourlyRate) throws SQLException 
 	{
 		addEmployeeTransaction = new AddHourlyEmployeeTransaction(Integer.parseInt(employeeId), name,
 				address, Double.parseDouble(hourlyRate));
-		addEmployeeTransaction.execute();
+		addEmployeeTransaction.execute(repository);
 	}
 	
-	public static void createNewEmployeeSalaried(String employeeId, String name, String address, String salary)
+	public static void createNewEmployeeSalaried(String employeeId, String name, String address, String salary) throws SQLException
 	{
 		addEmployeeTransaction = new AddSalariedEmployeeTransaction(Integer.parseInt(employeeId), name,
 				address, Double.parseDouble(salary));
-		addEmployeeTransaction.execute();
+		addEmployeeTransaction.execute(repository);
 	}
 	
 	public static void createNewEmployeeCommissioned(String employeeId, String name, String address, 
-			String monthlySalary, String commissionRate)
+			String monthlySalary, String commissionRate) throws SQLException
 	{
 		addEmployeeTransaction = new AddCommissionedEmployeeTransaction(Integer.parseInt(employeeId), name,
 				address, Double.parseDouble(monthlySalary), Double.parseDouble(commissionRate));
-		addEmployeeTransaction.execute();
+		addEmployeeTransaction.execute(repository);
 	}
 	
 		
 	public static List<Employee> showAllEmployees() {
-		//return PayrollDatabase.globalPayrollDatabase.getEmployees();
-		return ConnectionMySQL.relationalDatabase.getEmployees();
+		return repository.getEmployees();
 	
 	}
 	
 	public static Employee showEmployee(int employeeId) {
-		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+		return repository.getEmployee(employeeId);
 	}
 }

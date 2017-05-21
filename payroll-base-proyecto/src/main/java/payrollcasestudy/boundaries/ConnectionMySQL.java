@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import com.mysql.jdbc.Connection;
 
 import payrollcasestudy.entities.Employee;
+import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
+import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 
 
 public class ConnectionMySQL implements Repository{
@@ -16,7 +18,7 @@ public class ConnectionMySQL implements Repository{
 	public static ConnectionMySQL relationalDatabase = new ConnectionMySQL();
 	
 	private Connection connection;
-	private String localhost = "jdbc:mysql://localhost:3306";
+	private String localhost = "jdbc:mysql://localhost:33060";
 	private String userDB = "root";
 	private String password = "root";
 	
@@ -31,7 +33,28 @@ public class ConnectionMySQL implements Repository{
 	}
 	
 	public void addEmployee(int employeeId, Employee employee) {
-		// TODO Auto-generated method stub
+		int rs=0;
+		int rs2=0;
+		HourlyPaymentClassification hourlyClassification =  (HourlyPaymentClassification) employee.getPaymentClassification(); 
+		try{
+			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
+			String query_employee = "INSERT INTO rosquete_db.employee "
+					+ "(ci_employee, first_name, last_name, address, payment_type) "
+					+ "VALUES ('"+employee.getEmployeeId()+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"'), 'hourly')";
+			String query_classification = "INSERT INTO rosquete_db.hourly_payment_classification "
+					+ "(ci_employee, hourlyRate) "
+					+ "VALUES ('"+employee.getEmployeeId()+"', '"+hourlyClassification.getHourlyRate()+"')";
+			
+			Statement stmt = (Statement) connection.createStatement();
+			Statement stmt2 = (Statement) connection.createStatement();
+			rs = ((java.sql.Statement) stmt).executeUpdate(query_employee);
+			rs2 = ((java.sql.Statement) stmt2).executeUpdate(query_classification);
+			
+			System.out.println("Creo un nuevo empleado");
+		}catch (Exception e){
+			System.out.println("Me mataste");
+			System.err.println(e);
+		}
 		
 	}
 	
@@ -104,8 +127,28 @@ public class ConnectionMySQL implements Repository{
 	}
 
 	public Employee getEmployee(int employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+		Employee employee=null;
+		ResultSet rs=null;
+		try{
+			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
+			String query = "SELECT * "
+					+ "FROM rosquete_db.commissioned_payment_classification "
+					+ "INNER JOIN rosquete_db.employee ON rosquete_db.commissioned_payment_classification.ci_employee=rosquete_db.employee.ci_employee"
+					+ "WHERE rosquete_db.ci_employee = "+employeeId+"";
+			Statement stmt = (Statement) connection.createStatement();
+			rs = ((java.sql.Statement) stmt).executeQuery(query);
+			employee = new Employee(Integer.parseInt(rs.getString("ci_employee")),
+															  rs.getString("first_name"),
+															  rs.getString("address"));
+			HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(rs.getString("hourlyRate")));
+			employee.setPaymentClassification(hourlyClassification);
+			return employee;
+		}catch (Exception e){
+			System.out.println("se murio");
+			System.err.println(e);
+			return employee;
+		}
+		
 	}
 
 }
