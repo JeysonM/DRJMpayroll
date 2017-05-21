@@ -15,10 +15,13 @@ public class ConnectionMySQL implements Repository{
 	public static ConnectionMySQL relationalDatabase = new ConnectionMySQL();
 	
 	private Connection connection;
+	private String localhost = "jdbc:mysql://localhost:3306";
+	private String userDB = "root";
+	private String password = "root";
 	
 	public String getStatusConnection() {
 		try{
-			connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:33060","root","root");
+			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			return "Connection success";
 		}catch (Exception e){
 			return "Connection failed";
@@ -28,7 +31,7 @@ public class ConnectionMySQL implements Repository{
 	
 	public void viewEmployeeRosqueteDB_test() {
 		try{
-			connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:33060","root","root");
+			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query = "SELECT * FROM rosquete_db.employee";
 			Statement stmt = (Statement) connection.createStatement();
 			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
@@ -45,7 +48,7 @@ public class ConnectionMySQL implements Repository{
 	
 	public void viewActorDBsakila_test() {
 		try{
-			connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:33060","root","root");
+			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query = "SELECT * FROM rosquete_db.employee";
 			Statement stmt = (Statement) connection.createStatement();
 			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
@@ -70,7 +73,7 @@ public class ConnectionMySQL implements Repository{
     {
 		ResultSet rs=null;
 		try{
-			connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:33060","root","root");
+			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query = "SELECT * FROM rosquete_db.employee";
 			Statement stmt = (Statement) connection.createStatement();
 			rs = ((java.sql.Statement) stmt).executeQuery(query);

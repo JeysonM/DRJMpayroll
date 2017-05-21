@@ -49,8 +49,8 @@ public class EmployeeController {
 	
 		
 	public static List<Employee> showAllEmployees() {
-		return PayrollDatabase.globalPayrollDatabase.getEmployees();
-		//return ConnectionMySQL.relationalDatabase.getEmployees();
+		//return PayrollDatabase.globalPayrollDatabase.getEmployees();
+		return ConnectionMySQL.relationalDatabase.getEmployees();
 	
 	}
 	
