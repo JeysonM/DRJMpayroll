@@ -40,7 +40,7 @@ public class ConnectionMySQL implements Repository{
 			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query_employee = "INSERT INTO rosquete_db.employee "
 					+ "(ci_employee, first_name, last_name, address, payment_type) "
-					+ "VALUES ('"+employee.getEmployeeId()+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"'), 'hourly')";
+					+ "VALUES ('"+employee.getEmployeeId()+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'hourly')";
 			String query_classification = "INSERT INTO rosquete_db.hourly_payment_classification "
 					+ "(ci_employee, hourlyRate) "
 					+ "VALUES ('"+employee.getEmployeeId()+"', '"+hourlyClassification.getHourlyRate()+"')";
