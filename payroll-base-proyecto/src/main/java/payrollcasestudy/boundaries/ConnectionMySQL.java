@@ -127,21 +127,24 @@ public class ConnectionMySQL implements Repository{
 	}
 
 	public Employee getEmployee(int employeeId) {
-		Employee employee=null;
+		Employee employee=new Employee(000,"undefined","undefined");
 		ResultSet rs=null;
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query = "SELECT * "
-					+ "FROM rosquete_db.commissioned_payment_classification "
-					+ "INNER JOIN rosquete_db.employee ON rosquete_db.commissioned_payment_classification.ci_employee=rosquete_db.employee.ci_employee"
-					+ "WHERE rosquete_db.ci_employee = "+employeeId+"";
+					+ "FROM rosquete_db.hourly_payment_classification "
+					+ "INNER JOIN rosquete_db.employee ON rosquete_db.hourly_payment_classification.ci_employee=rosquete_db.employee.ci_employee "
+					+ "WHERE rosquete_db.hourly_payment_classification.ci_employee='"+employeeId+"'";
 			Statement stmt = (Statement) connection.createStatement();
 			rs = ((java.sql.Statement) stmt).executeQuery(query);
-			employee = new Employee(Integer.parseInt(rs.getString("ci_employee")),
-															  rs.getString("first_name"),
-															  rs.getString("address"));
-			HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(rs.getString("hourlyRate")));
-			employee.setPaymentClassification(hourlyClassification);
+			while(rs.next()){
+				employee = new Employee(Integer.parseInt(rs.getString("ci_employee")),
+						  rs.getString("first_name"),
+						  rs.getString("address"));
+				HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(rs.getString("hourlyRate")));
+				employee.setPaymentClassification(hourlyClassification);
+			}
+			
 			return employee;
 		}catch (Exception e){
 			System.out.println("se murio");
