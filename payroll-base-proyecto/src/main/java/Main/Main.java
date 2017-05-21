@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import payrollcasestudy.boundaries.ConnectionMySQL;
-import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
