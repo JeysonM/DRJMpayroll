@@ -188,30 +188,32 @@ public class ConnectionMySQL implements Repository{
 	}
 
 	public Employee getEmployee(int employeeId) {
-		Employee employee=new Employee(000,"undefined","undefined");
+		Employee employee= new Employee(000,"undefined","undefined");
 		ResultSet result=null;
 		try{
 			result = returnEmployeePaymentClassificationFromDB(employeeId);
 			System.out.println("logre salir de returnEmployeePaymentClassificationFromDB");
-			//while(result.next()){	
-			employee = new Employee(Integer.parseInt(result.getString("ci_employee")),
+			//while(result.next()){
+				System.out.println("logre entrar al segundo while");
+				employee = new Employee(Integer.parseInt(result.getString("ci_employee")),
 					result.getString("first_name"),
 					result.getString("address"));
-			System.out.println("first_name >> "+result.getString("first_name").toString());
-			System.out.println("payment_type >> "+result.getString("payment_type").toString());
-			if(result.getString("payment_type")=="hourly"){
+				//System.out.println("first_name >> "+result.getString("first_name").toString());
+				//System.out.println("payment_type >> "+result.getString("payment_type").toString());
 				
-				HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(result.getString("hourlyRate")));
-				employee.setPaymentClassification(hourlyClassification);
-			}
-			if(result.getString("payment_type")=="commission"){
-				CommissionedPaymentClassification commissionClassification =  new CommissionedPaymentClassification(Double.parseDouble(result.getString("commissionRate")),result.getDouble("monthlySalary"));
-				employee.setPaymentClassification(commissionClassification);
-			}
-			if(result.getString("payment_type")=="salary"){
-				SalariedClassification salaryClassification =  new SalariedClassification(result.getDouble("salary"));
-				employee.setPaymentClassification(salaryClassification);
-			}
+				if(result.getString("payment_type").toString().equals("hourly")){
+					System.out.println("logre a la condicion hourly");
+					HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(result.getString("hourlyRate")));
+					employee.setPaymentClassification(hourlyClassification);
+				}
+				if(result.getString("payment_type").toString().equals("commission")){
+					CommissionedPaymentClassification commissionClassification =  new CommissionedPaymentClassification(Double.parseDouble(result.getString("commissionRate")),result.getDouble("monthlySalary"));
+					employee.setPaymentClassification(commissionClassification);
+				}
+				if(result.getString("payment_type").toString().equals("salary")){
+					SalariedClassification salaryClassification =  new SalariedClassification(result.getDouble("salary"));
+					employee.setPaymentClassification(salaryClassification);
+				}
 			//}
 		}catch (Exception e){
 			System.out.println("se murio");
@@ -222,23 +224,29 @@ public class ConnectionMySQL implements Repository{
 	
 	
 	
-	private ResultSet returnEmployeePaymentClassificationFromDB(int employeeId) throws SQLException {
+	private ResultSet returnEmployeePaymentClassificationFromDB(int employeeId){
 		ResultSet employee = findElementInTable(employeeId,"employee");
 		ResultSet paymentClassification=null;
-		while(employee.next()){
-			System.out.println("Entro a while de returnEmployee");
-			System.out.println("Este es mi tipo >> "+employee.getString("payment_type").toString());
-			
-			if(employee.getString("payment_type").toString()=="hourly"){
-				System.out.println("verifico si era hourly");
-				paymentClassification = executeQueryOfPaymentClassificationInDB(employeeId,"hourly_payment_classification");
+		try{
+			while(employee.next()){
+				System.out.println("Entro a while de returnEmployee");
+				System.out.println("Este es mi tipo >> "+employee.getString("payment_type").toString());
+				
+				if(employee.getString("payment_type").toString().equals("hourly")){
+					System.out.println("verifico si era hourly");
+					paymentClassification = executeQueryOfPaymentClassificationInDB(employeeId,"hourly_payment_classification");
+				}
+				if(employee.getString("payment_type").toString().equals("commission")){
+					paymentClassification = executeQueryOfPaymentClassificationInDB(employeeId,"commissioned_payment_classification");
+				}
+				if(employee.getString("payment_type").toString().equals("salary")){
+					paymentClassification = executeQueryOfPaymentClassificationInDB(employeeId,"salaried_classification");
+				}
+				return paymentClassification;
 			}
-			if(employee.getString("payment_type").toString()=="commission"){
-				paymentClassification = executeQueryOfPaymentClassificationInDB(employeeId,"commissioned_payment_classification");
-			}
-			if(employee.getString("payment_type").toString()=="salary"){
-				paymentClassification = executeQueryOfPaymentClassificationInDB(employeeId,"salaried_classification");
-			}
+		}catch (Exception e){
+			System.out.println("se murio en returnEmployeePaymentClassificationFromDB");
+			System.err.println(e);
 		}
 		return paymentClassification;
 	}
@@ -254,7 +262,9 @@ public class ConnectionMySQL implements Repository{
 					+ "WHERE rosquete_db."+paymentClassification+".ci_employee='"+employeeId+"'";
 			Statement stmt = (Statement) connection.createStatement();
 			result = ((java.sql.Statement) stmt).executeQuery(query);
-			
+			while(result.next()){
+				return result;
+			}
 			System.out.println("Se conecto con la tabla >> "+paymentClassification.toString()+"");
 		}catch (Exception e){
 			System.out.println("Mori en executeQueryOfPaymentClassificationInDB");
