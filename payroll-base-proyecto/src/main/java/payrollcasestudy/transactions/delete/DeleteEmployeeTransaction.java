@@ -12,7 +12,7 @@ public class DeleteEmployeeTransaction implements Transaction{
         this.employeeId = employeeId;
     }
 
-    public void execute(Repository repository) throws SQLException {
+    public void execute(Repository repository){
         repository.deleteEmployee(employeeId);
     }
 }

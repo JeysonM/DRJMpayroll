@@ -22,7 +22,7 @@ public class AddTimeCardTransaction implements Transaction {
         this.employeeId = employeeId;
     }
 
-    public void execute(Repository repository) throws SQLException{
+    public void execute(Repository repository){
         Employee employee = repository.getEmployee(employeeId);
         if (employee != null){
             PaymentClassification paymentClassification = employee.getPaymentClassification();

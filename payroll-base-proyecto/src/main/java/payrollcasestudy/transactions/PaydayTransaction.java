@@ -16,7 +16,7 @@ public class PaydayTransaction implements Transaction{
         this.payDate = payDate;
     }
 
-    public void execute(Repository repository) throws SQLException {
+    public void execute(Repository repository){
         for (Integer employeeId: repository.getAllEmployeeIds()){
             Employee employee = repository.getEmployee(employeeId);
             if (employee.isPayDate(payDate)){

@@ -15,7 +15,7 @@ public abstract class ChangeEmployeeTransaction implements Transaction {
         this.employeeId = employeeId;
     }
 
-    public void execute(Repository repository) throws SQLException{
+    public void execute(Repository repository){
         Employee employee = repository.getEmployee(employeeId);
         changeEmployee(employee, repository);
     }

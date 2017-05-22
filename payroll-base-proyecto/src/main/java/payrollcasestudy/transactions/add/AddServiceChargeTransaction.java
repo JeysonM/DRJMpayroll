@@ -22,7 +22,7 @@ public class AddServiceChargeTransaction implements Transaction {
         this.amount = amount;
     }
 	
-	public void execute(Repository repository) throws SQLException{
+	public void execute(Repository repository){
 		
 		Employee employee = repository.getUnionMember(memberId);
 		if(employee != null){
