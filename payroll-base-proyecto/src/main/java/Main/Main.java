@@ -43,6 +43,11 @@ public class Main {
 		      return new ModelAndView(view, "layout.vtl");
 		    }, new VelocityTemplateEngine());
 		
+		get("/services", (request, response) -> {
+			view.put("template","services.vtl");
+			return new ModelAndView(view, "layout.vtl");
+		}, new VelocityTemplateEngine());
+		
 		get("/employees", (request, response) -> {
 			
 			List<Employee> employees = new ArrayList<>();

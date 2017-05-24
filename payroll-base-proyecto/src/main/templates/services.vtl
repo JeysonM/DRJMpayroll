@@ -1,0 +1,89 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<label for="">Empleado:</label><input type="number" name="day" class="form-control" id="" placeholder="CI del empleado">
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+
+	</br>
+	
+	<div class="panel panel-default">
+	  <div class="panel-heading">Registro de Horas</div>
+	  <div class="panel-body">
+	  <form method='post' action='/payHourly'>
+	  			<div class="row">
+	  				<div class="col-md-4">
+	  					<label for="">Día:</label>
+					    <input type="number" name="day" class="form-control" id="" placeholder="1-31">
+	  				</div>
+	  				<div class="col-md-4">
+	  					<label for="">Mes:</label>
+					    <input type="number" name="month" class="form-control" id="" placeholder="1-12">
+	  				</div>
+	  				<div class="col-md-4">
+	  					<label for="">Año:</label>
+					    <input type="number" name="year" class="form-control" id="" placeholder="Ej: 2005">
+	  				</div>
+	  				<div class="col-md-4">
+	  					<label for="">Horas:</label>
+					    <input type="number" name="hours" class="form-control" id="" placeholder="">
+	  				</div>
+				</div>
+				</br>
+				<button type="submit" class="btn btn-warning">  Registrar Horas  </button>
+	  </form> 
+	  </div>
+	</div>
+	
+	</br>
+	
+	<div class="panel panel-default">
+	  <div class="panel-heading">Registro de Ventas</div>
+	  <div class="panel-body">
+	   <form method='post' action='/payCommissioned'>
+	  			<div class="row">
+	  				<div class="col-md-4">
+	  					<label for="">Día:</label>
+					    <input type="number" name="day" class="form-control" id="" placeholder="1-31">
+	  				</div>
+	  				<div class="col-md-4">
+	  					<label for="">Mes:</label>
+					    <input type="number" name="month" class="form-control" id="" placeholder="1-12">
+	  				</div>
+	  				<div class="col-md-4">
+	  					<label for="">Año:</label>
+					    <input type="number" name="year" class="form-control" id="" placeholder="Ej: 2005">
+	  				</div>
+	  				<div class="col-md-4">
+	  					<label for="">Monto de Ventas:</label>
+					    <input type="number" step="0.01" name="sales" class="form-control" id="" placeholder="Monto por Ventas">
+	  				</div>
+				</div>
+				</br>
+				<button type="submit" class="btn btn-warning">  Registrar Ventas  </button>
+	  	</form>
+	  </div>
+	</div>	
+	
+	</br>
+	
+	<div class="panel panel-default">
+	  <div class="panel-heading">Servicio de Sindicato</div>
+	  <div class="panel-body">
+	  <form method='post' action='/'>
+	  		<div class="row">
+	  			<div class="col-md-4">
+	  				<label for="">Monto de Servicio:</label>
+					  <input type="number" name="day" class="form-control" id="" placeholder="">
+				</div>
+	  		</div>
+	  </form>
+	  </div>
+	</div>	
+</div>
+			
+			
