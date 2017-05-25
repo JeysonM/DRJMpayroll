@@ -37,7 +37,7 @@ public class PaymentController {
 		paymentTransaction.execute(repository);
 	}
 	
-	public static void calculateAllPays(String year, String month, String day) throws SQLException
+	public static void calculateAllPays(String year, String month, String day)
 	{
 		Calendar payDate = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
 		paydayTransaction  = new PaydayTransaction(payDate);

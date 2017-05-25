@@ -132,8 +132,9 @@ public class Main {
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
 			payCheck = PaymentController.getPayCheckFromPayDayTransaction((request.params(":id")));
 			double total = payCheck.getNetPay();
+			System.out.printf("total Paycheck: %d", total);
 			view.put("employee", employee);
-			view.put("total", total);
+			//view.put("total", total);
 			view.put("template","payEmployee.vtl");
             return new ModelAndView(view, "layout.vtl");
         }, new VelocityTemplateEngine());
@@ -152,6 +153,19 @@ public class Main {
         }, new VelocityTemplateEngine());
 		
 		
+//		PaymentController.calculateAllPays("2017","11","24");
+//		Employee employee;
+//		PayCheck payCheck;
+//		employee = EmployeeController.showEmployee(Integer.parseInt("111"));
+//		payCheck = PaymentController.getPayCheckFromPayDayTransaction(("111"));
+//		if(payCheck!=null)
+//		{double total = payCheck.getNetPay();
+//		System.out.printf("total Paycheck: ", String.valueOf(total));
+//		}
+//		else
+//		{
+//			System.out.printf("coniiooooo");
+//		}
 	}
 
 	

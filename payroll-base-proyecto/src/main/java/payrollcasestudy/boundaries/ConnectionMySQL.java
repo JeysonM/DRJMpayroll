@@ -1,6 +1,7 @@
 package payrollcasestudy.boundaries;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.sql.DriverManager;
@@ -14,6 +15,9 @@ import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClass
 import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.SalariedClassification;
+import payrollcasestudy.entities.paymentschedule.BiweeklyPaymentSchedule;
+import payrollcasestudy.entities.paymentschedule.MonthlyPaymentSchedule;
+import payrollcasestudy.entities.paymentschedule.WeeklyPaymentSchedule;
 
 
 public class ConnectionMySQL implements Repository{
@@ -60,11 +64,12 @@ public class ConnectionMySQL implements Repository{
     {
 		int result=0;
 		HourlyPaymentClassification hourlyClassification =  (HourlyPaymentClassification) employee.getPaymentClassification();
+		
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query_employee = "INSERT INTO rosquete_db.employee "
-					+ "(ci_employee, first_name, last_name, address, payment_type) "
-					+ "VALUES ('"+employeeId+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'hourly')";
+					+ "(ci_employee, first_name, last_name, address, payment_type, payment_schedule) "
+					+ "VALUES ('"+employeeId+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'hourly','weekly')";
 			String query_classification = "INSERT INTO rosquete_db.hourly_payment_classification "
 					+ "(ci_employee, hourlyRate) "
 					+ "VALUES ('"+employeeId+"', '"+hourlyClassification.getHourlyRate()+"')";
@@ -85,8 +90,8 @@ public class ConnectionMySQL implements Repository{
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query_employee = "INSERT INTO rosquete_db.employee "
-					+ "(ci_employee, first_name, last_name, address, payment_type) "
-					+ "VALUES ('"+employeeId+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'salary')";
+					+ "(ci_employee, first_name, last_name, address, payment_type, payment_schedule) "
+					+ "VALUES ('"+employeeId+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'salary', 'monthly')";
 			String query_classification = "INSERT INTO rosquete_db.salaried_classification "
 					+ "(ci_employee, salary) "
 					+ "VALUES ('"+employeeId+"', '"+salariedPayment.getSalary()+"')";
@@ -107,8 +112,8 @@ public class ConnectionMySQL implements Repository{
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query_employee = "INSERT INTO rosquete_db.employee "
-					+ "(ci_employee, first_name, last_name, address, payment_type) "
-					+ "VALUES ('"+employeeId+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'commission')";
+					+ "(ci_employee, first_name, last_name, address, payment_type, payment_schedule) "
+					+ "VALUES ('"+employeeId+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'commission','biweekly')";
 			String query_classification = "INSERT INTO rosquete_db.commissioned_payment_classification "
 					+ "(ci_employee, commissionRate, monthlySalary) "
 					+ "VALUES ('"+employeeId+"', '"+commissionPayment.getCommissionRate()+"', '"+commissionPayment.getMonthlySalary()+"')";
@@ -158,8 +163,21 @@ public class ConnectionMySQL implements Repository{
 
 
 	public Set<Integer> getAllEmployeeIds() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Integer> employees = new HashSet<Integer>();
+		ResultSet results=null;
+		try{
+			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
+			String query = "SELECT ci_employee FROM rosquete_db.employee";
+			Statement stmt = (Statement) connection.createStatement();
+			results = ((java.sql.Statement) stmt).executeQuery(query);
+			while(results.next()){
+				employees.add(results.getInt("ci_employee"));
+			}
+			return employees;
+		}catch (Exception e){
+			System.err.println(e);
+			return null;
+		}
 	}
 
 	public void deleteUnionMember(int memberId) {
@@ -201,18 +219,28 @@ public class ConnectionMySQL implements Repository{
 				//System.out.println("first_name >> "+result.getString("first_name").toString());
 				//System.out.println("payment_type >> "+result.getString("payment_type").toString());
 				
-				if(result.getString("payment_type").toString().equals("hourly")){
+				if(result.getString("payment_type").toString().equals("hourly") &&
+						result.getString("payment_schedule").toString().equals("weekly")){
 					System.out.println("logre a la condicion hourly");
 					HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(result.getString("hourlyRate")));
+					WeeklyPaymentSchedule weeklyPayment = new WeeklyPaymentSchedule();
 					employee.setPaymentClassification(hourlyClassification);
+					employee.setPaymentSchedule(weeklyPayment);
+					
 				}
-				if(result.getString("payment_type").toString().equals("commission")){
+				if(result.getString("payment_type").toString().equals("commission") &&
+						result.getString("payment_schedule").toString().equals("biweekly")){
 					CommissionedPaymentClassification commissionClassification =  new CommissionedPaymentClassification(Double.parseDouble(result.getString("commissionRate")),result.getDouble("monthlySalary"));
+					BiweeklyPaymentSchedule biweeklyPayment = new BiweeklyPaymentSchedule();
 					employee.setPaymentClassification(commissionClassification);
+					employee.setPaymentSchedule(biweeklyPayment);
 				}
-				if(result.getString("payment_type").toString().equals("salary")){
+				if(result.getString("payment_type").toString().equals("salary") &&
+						result.getString("payment_schedule").toString().equals("monthly")){
 					SalariedClassification salaryClassification =  new SalariedClassification(result.getDouble("salary"));
+					MonthlyPaymentSchedule monthlyPayment = new MonthlyPaymentSchedule();
 					employee.setPaymentClassification(salaryClassification);
+					employee.setPaymentSchedule(monthlyPayment);
 				}
 			//}
 		}catch (Exception e){
