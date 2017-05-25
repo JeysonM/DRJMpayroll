@@ -113,7 +113,7 @@ public class Employee {
         payCheck.setGrossPay(grossPay);
         payCheck.setNetPay(netPay);
         payCheck.setDeductions(deductions);
-        paymentMethod.pay(payCheck);
+        //paymentMethod.pay(payCheck);
     }
 
 	public UnionAffiliation getUnionAffiliation() {

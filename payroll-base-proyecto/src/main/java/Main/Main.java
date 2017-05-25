@@ -132,9 +132,9 @@ public class Main {
 			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
 			payCheck = PaymentController.getPayCheckFromPayDayTransaction((request.params(":id")));
 			double total = payCheck.getNetPay();
-			System.out.printf("total Paycheck: %d", total);
 			view.put("employee", employee);
-			//view.put("total", total);
+			view.put("total", total);
+			view.put("payCheck", payCheck);
 			view.put("template","payEmployee.vtl");
             return new ModelAndView(view, "layout.vtl");
         }, new VelocityTemplateEngine());
