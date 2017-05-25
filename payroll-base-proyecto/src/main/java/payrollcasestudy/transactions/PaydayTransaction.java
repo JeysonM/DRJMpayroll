@@ -30,4 +30,9 @@ public class PaydayTransaction implements Transaction{
     public PayCheck getPaycheck(int employeeId) {
         return payChecks.get(employeeId);
     }
+    
+    public List<PayCheck> getAllPayChecks() {
+    	 List<PayCheck> paycheckList = new ArrayList<PayCheck>(payChecks.values());
+         return paycheckList;
+    }
 }

@@ -5,6 +5,7 @@ import static java.util.Calendar.NOVEMBER;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import payrollcasestudy.boundaries.ConnectionMySQL;
 import payrollcasestudy.boundaries.Repository;
@@ -48,6 +49,11 @@ public class PaymentController {
 	public static PayCheck getPayCheckFromPayDayTransaction(String employeeId)
 	{
 		return paydayTransaction.getPaycheck(Integer.parseInt(employeeId));
+	}
+	
+	public static List<PayCheck> getAllPayChecksFromPayDayTransaction()
+	{
+		return paydayTransaction.getAllPayChecks();
 	}
 	
 	

@@ -1,6 +1,7 @@
 package Main;
 import static spark.Spark.*;
 
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +10,11 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
+import org.javatuples.Pair;
+
+import com.google.gson.Gson;
+
+import payrollcasestudy.api.JsonUtil;
 import payrollcasestudy.boundaries.ConnectionMySQL;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
@@ -26,10 +32,12 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.Spark;
+import spark.TemplateEngine;
 import spark.template.velocity.VelocityTemplateEngine;
 
 public class Main {
 	public static void main(String[] args) {
+		JsonUtil apiJson;
 		//staticFileLocation("/public");
 		HashMap<String,Object> view = new HashMap<String,Object>();
 		//ConnectionMySQL myconnection = new ConnectionMySQL();
@@ -152,21 +160,25 @@ public class Main {
             return new ModelAndView(view, "allEmployees.vtl");
         }, new VelocityTemplateEngine());
 		
+		//List<Employee> employees = new ArrayList<>();
+		//employees = EmployeeController.showAllEmployees();
+		get("/api/v1/employees", (req, res) -> EmployeeController.showAllEmployees(), JsonUtil.json());
+		get("/api/v1/pays", (req, res) -> PaymentController.getAllPayChecksFromPayDayTransaction(), JsonUtil.json());
 		
-//		PaymentController.calculateAllPays("2017","11","24");
-//		Employee employee;
-//		PayCheck payCheck;
-//		employee = EmployeeController.showEmployee(Integer.parseInt("111"));
-//		payCheck = PaymentController.getPayCheckFromPayDayTransaction(("111"));
-//		if(payCheck!=null)
-//		{double total = payCheck.getNetPay();
-//		System.out.printf("total Paycheck: ", String.valueOf(total));
-//		}
-//		else
-//		{
-//			System.out.printf("coniiooooo");
-//		}
+		get("/api/v1/pays/:id", (request, response) -> {
+			//Pair<Employee,PayCheck> pair;
+			String pair;
+			Employee employee;
+			PayCheck payCheck;
+			employee = EmployeeController.showEmployee(Integer.parseInt(request.params(":id")));
+			payCheck = PaymentController.getPayCheckFromPayDayTransaction((request.params(":id")));
+			String json1 = new Gson().toJson(employee);
+			String json2 = new Gson().toJson(payCheck);
+			return pair = "["+json1+"+++++"+json2+"]";
+		}, JsonUtil.json());
+
 	}
+
 
 	
 	
