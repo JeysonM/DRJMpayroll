@@ -1,4 +1,4 @@
-package payrollcasestudy.transactions.controllers;
+package payrollcasestudy.transactions.services;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,25 +23,29 @@ import payrollcasestudy.transactions.add.AddSalariedEmployeeTransaction;
 import payrollcasestudy.transactions.add.AddSalesReceiptTransaction;
 import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
-public class EmployeeController {
-	private static Repository repository = new ConnectionMySQL();
-	private static Transaction addEmployeeTransaction;
+public class EmployeeService {
+	private Repository repository;
+	private Transaction addEmployeeTransaction;
 	
-	public static void createNewEmployeeHourly(String employeeId, String name, String address, String hourlyRate) throws SQLException 
+	public EmployeeService(Repository repository) {
+		this.repository = repository;
+	}
+
+	public void createNewEmployeeHourly(String employeeId, String name, String address, String hourlyRate) throws SQLException 
 	{
 		addEmployeeTransaction = new AddHourlyEmployeeTransaction(Integer.parseInt(employeeId), name,
 				address, Double.parseDouble(hourlyRate));
 		addEmployeeTransaction.execute(repository);
 	}
 	
-	public static void createNewEmployeeSalaried(String employeeId, String name, String address, String salary) throws SQLException
+	public void createNewEmployeeSalaried(String employeeId, String name, String address, String salary) throws SQLException
 	{
 		addEmployeeTransaction = new AddSalariedEmployeeTransaction(Integer.parseInt(employeeId), name,
 				address, Double.parseDouble(salary));
 		addEmployeeTransaction.execute(repository);
 	}
 	
-	public static void createNewEmployeeCommissioned(String employeeId, String name, String address, 
+	public void createNewEmployeeCommissioned(String employeeId, String name, String address, 
 			String monthlySalary, String commissionRate) throws SQLException
 	{
 		addEmployeeTransaction = new AddCommissionedEmployeeTransaction(Integer.parseInt(employeeId), name,
@@ -50,12 +54,12 @@ public class EmployeeController {
 	}
 	
 		
-	public static List<Employee> showAllEmployees() {
+	public List<Employee> showAllEmployees() {
 		return repository.getEmployees();
 	
 	}
 	
-	public static Employee showEmployee(int employeeId) {
+	public Employee showEmployee(int employeeId) {
 		return repository.getEmployee(employeeId);
 	}
 }

@@ -1,4 +1,4 @@
-package payrollcasestudy.transactions.controllers;
+package payrollcasestudy.transactions.services;
 
 import static java.util.Calendar.NOVEMBER;
 
@@ -15,15 +15,16 @@ import payrollcasestudy.transactions.Transaction;
 import payrollcasestudy.transactions.add.AddSalesReceiptTransaction;
 import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
-public class PaymentController {
-	private static Repository repository = new ConnectionMySQL();
+public class PaymentService {
+	private Repository repository;
+	private Transaction paymentTransaction;
+	private PaydayTransaction paydayTransaction;
 	
-	private static Transaction paymentTransaction;
-	private static PaydayTransaction paydayTransaction;
-	
-	
-	
-	public static void createPaymentForHourly(String year, String month, String day, String hours, String employeeId) throws SQLException
+	public PaymentService(Repository repository) {
+		this.repository = repository;
+	}
+
+	public void createPaymentForHourly(String year, String month, String day, String hours, String employeeId) throws SQLException
 	{
 		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
 		paymentTransaction = new AddTimeCardTransaction(date, Double.parseDouble(hours),Integer.parseInt(employeeId));
@@ -31,14 +32,14 @@ public class PaymentController {
 		
 	}
 	
-	public static void createPaymentForSalesReceipt(String year, String month, String day, String amount, String employeeId) throws SQLException
+	public void createPaymentForSalesReceipt(String year, String month, String day, String amount, String employeeId) throws SQLException
 	{
 		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
 		paymentTransaction = new AddSalesReceiptTransaction(date, Double.parseDouble(amount),Integer.parseInt(employeeId));
 		paymentTransaction.execute(repository);
 	}
 	
-	public static void calculateAllPays(String year, String month, String day)
+	public void calculateAllPays(String year, String month, String day)
 	{
 		Calendar payDate = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
 		paydayTransaction  = new PaydayTransaction(payDate);
@@ -46,12 +47,12 @@ public class PaymentController {
 		
 	}
 	
-	public static PayCheck getPayCheckFromPayDayTransaction(String employeeId)
+	public PayCheck getPayCheckFromPayDayTransaction(String employeeId)
 	{
 		return paydayTransaction.getPaycheck(Integer.parseInt(employeeId));
 	}
 	
-	public static List<PayCheck> getAllPayChecksFromPayDayTransaction()
+	public List<PayCheck> getAllPayChecksFromPayDayTransaction()
 	{
 		return paydayTransaction.getAllPayChecks();
 	}
