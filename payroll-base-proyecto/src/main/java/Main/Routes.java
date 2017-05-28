@@ -30,13 +30,7 @@ public class Routes {
 	public void manageRoutes()
 	{
 		JsonUtil apiJson;
-		//staticFileLocation("/public");
 		HashMap<String,Object> view = new HashMap<String,Object>();
-		//ConnectionMySQL myconnection = new ConnectionMySQL();
-		//Repository repository = myconnection;
-		//System.out.println(myconnection.getStatusConnection());
-		//myconnection.viewEmployeeRosqueteDB_test();
-		
 		get("/", (request, response) -> {
 			
 			  view.put("template","indexEmployee.vtl");
@@ -152,8 +146,6 @@ public class Routes {
             return new ModelAndView(view, "allEmployees.vtl");
         }, new VelocityTemplateEngine());
 		
-		//List<Employee> employees = new ArrayList<>();
-		//employees = EmployeeController.showAllEmployees();
 		get("/api/v1/employees", (req, res) -> employeeService.showAllEmployees(), JsonUtil.json());
 		get("/api/v1/pays", (req, res) -> paymentService.getAllPayChecksFromPayDayTransaction(), JsonUtil.json());
 		
@@ -162,11 +154,11 @@ public class Routes {
 			String pair;
 			Employee employee;
 			PayCheck payCheck;
+			
 			employee = employeeService.showEmployee(Integer.parseInt(request.params(":id")));
 			payCheck = paymentService.getPayCheckFromPayDayTransaction((request.params(":id")));
-			String json1 = new Gson().toJson(employee);
-			String json2 = new Gson().toJson(payCheck);
-			return pair = "["+json1+"+++++"+json2+"]";
+			Payroll payroll = new Payroll(employee.getEmployeeId(),employee.getName(),payCheck.getNetPay());
+			return payroll;
 		}, JsonUtil.json());
 
 	}
