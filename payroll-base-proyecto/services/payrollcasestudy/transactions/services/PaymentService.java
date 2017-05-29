@@ -24,15 +24,16 @@ public class PaymentService {
 		this.repository = repository;
 	}
 
-	public void createPaymentForHourly(String year, String month, String day, String hours, String employeeId) throws SQLException
+	public void createPaymentForHourly(String employeeId, String year, String month, String day, String hours)
 	{
 		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
+		System.out.println("entre al metodo y cree la fecha" + employeeId);
 		paymentTransaction = new AddTimeCardTransaction(date, Double.parseDouble(hours),Integer.parseInt(employeeId));
 		paymentTransaction.execute(repository);
 		
 	}
 	
-	public void createPaymentForSalesReceipt(String year, String month, String day, String amount, String employeeId) throws SQLException
+	public void createPaymentForSalesReceipt(String employeeId, String year, String month, String day, String amount)
 	{
 		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
 		paymentTransaction = new AddSalesReceiptTransaction(date, Double.parseDouble(amount),Integer.parseInt(employeeId));

@@ -1,20 +1,19 @@
 <div class="container">
-	<div class="row">
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-4">
-			<label for="">Empleado:</label><input type="number" name="day" class="form-control" id="" placeholder="CI del empleado">
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
-
 	</br>
 	
 	<div class="panel panel-default">
 	  <div class="panel-heading">Registro de Horas</div>
 	  <div class="panel-body">
 	  <form method='post' action='/payHourly'>
+	  <div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<label for="">Empleado:</label><input type="number" name="employeeId" class="form-control" id="" placeholder="CI del empleado">
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
 	  			<div class="row">
 	  				<div class="col-md-4">
 	  					<label for="">Día:</label>
@@ -45,6 +44,15 @@
 	  <div class="panel-heading">Registro de Ventas</div>
 	  <div class="panel-body">
 	   <form method='post' action='/payCommissioned'>
+	   <div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<label for="">Empleado:</label><input type="number" name="employeeId" class="form-control" id="" placeholder="CI del empleado">
+		</div>
+		<div class="col-md-4">
+		</div>
+		</div>
 	  			<div class="row">
 	  				<div class="col-md-4">
 	  					<label for="">Día:</label>
@@ -75,10 +83,20 @@
 	  <div class="panel-heading">Servicio de Sindicato</div>
 	  <div class="panel-body">
 	  <form method='post' action='/'>
+	  
+	  <div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<label for="">Empleado:</label><input type="number" name="employeeId" class="form-control" id="" placeholder="CI del empleado">
+		</div>
+		<div class="col-md-4">
+		</div>
+	 </div>
 	  		<div class="row">
 	  			<div class="col-md-4">
 	  				<label for="">Monto de Servicio:</label>
-					  <input type="number" name="day" class="form-control" id="" placeholder="">
+					  <input type="number" name="monto" class="form-control" id="" placeholder="">
 				</div>
 	  		</div>
 	  </form>

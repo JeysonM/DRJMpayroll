@@ -93,18 +93,16 @@ public class Routes {
 		
 		post("/payHourly", (request, response) -> {
 			
-			paymentService.createPaymentForHourly(request.queryParams("year"),
-					request.queryParams("month"),request.queryParams("day"), request.queryParams("hours"),
-					request.queryParams("employeeId"));
+			paymentService.createPaymentForHourly(request.queryParams("employeeId"), request.queryParams("year"),
+					request.queryParams("month"),request.queryParams("day"), request.queryParams("hours"));
 			response.redirect("/employees");
             return new ModelAndView(view, "allEmployee.vtl");
         }, new VelocityTemplateEngine());
 		
 		post("/payCommissioned", (request, response) -> {
 			
-			paymentService.createPaymentForSalesReceipt(request.queryParams("year"),
-					request.queryParams("month"),request.queryParams("day"), request.queryParams("sales"),
-					request.queryParams("employeeId"));
+			paymentService.createPaymentForSalesReceipt(request.queryParams("employeeId"), request.queryParams("year"),
+					request.queryParams("month"),request.queryParams("day"), request.queryParams("sales"));
 			response.redirect("/employees");
             return new ModelAndView(view, "allEmployee.vtl");
         }, new VelocityTemplateEngine());
