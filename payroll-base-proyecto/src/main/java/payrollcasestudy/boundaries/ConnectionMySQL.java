@@ -155,8 +155,8 @@ public class ConnectionMySQL implements Repository{
 			while(results.next()){
 				Employee employee = new Employee(Integer.parseInt(results.getString("ci_employee")),
 						results.getString("first_name"),results.getString("address"));
-				employeesList.add(employee);
-				
+				employeesList.add(employee);	
+				//memoryDatabase.addEmployee(results.getInt("ci_employee"), employee);
 			}
 			return employeesList;
 		}catch (Exception e){
@@ -214,30 +214,30 @@ public class ConnectionMySQL implements Repository{
 		try{
 			result = returnEmployeePaymentClassificationFromDB(employeeId);
 			employee = memoryDatabase.getEmployee(result.getInt("ci_employee"));
-//			
-//				if(result.getString("payment_type").toString().equals("hourly") &&
-//						result.getString("payment_schedule").toString().equals("weekly")){
-//					System.out.println("logre a la condicion hourly");
-//					HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(result.getString("hourlyRate")));
-//					WeeklyPaymentSchedule weeklyPayment = new WeeklyPaymentSchedule();
-//					employee.setPaymentClassification(hourlyClassification);
-//					employee.setPaymentSchedule(weeklyPayment);
-//					
-//				}
-//				if(result.getString("payment_type").toString().equals("commission") &&
-//						result.getString("payment_schedule").toString().equals("biweekly")){
-//					CommissionedPaymentClassification commissionClassification =  new CommissionedPaymentClassification(Double.parseDouble(result.getString("commissionRate")),result.getDouble("monthlySalary"));
-//					BiweeklyPaymentSchedule biweeklyPayment = new BiweeklyPaymentSchedule();
-//					employee.setPaymentClassification(commissionClassification);
-//					employee.setPaymentSchedule(biweeklyPayment);
-//				}
-//				if(result.getString("payment_type").toString().equals("salary") &&
-//						result.getString("payment_schedule").toString().equals("monthly")){
-//					SalariedClassification salaryClassification =  new SalariedClassification(result.getDouble("salary"));
-//					MonthlyPaymentSchedule monthlyPayment = new MonthlyPaymentSchedule();
-//					employee.setPaymentClassification(salaryClassification);
-//					employee.setPaymentSchedule(monthlyPayment);
-//				}
+			
+				if(result.getString("payment_type").toString().equals("hourly") &&
+						result.getString("payment_schedule").toString().equals("weekly")){
+					System.out.println("logre a la condicion hourly");
+					HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(result.getString("hourlyRate")));
+					WeeklyPaymentSchedule weeklyPayment = new WeeklyPaymentSchedule();
+					employee.setPaymentClassification(hourlyClassification);
+					employee.setPaymentSchedule(weeklyPayment);
+					
+				}
+				if(result.getString("payment_type").toString().equals("commission") &&
+						result.getString("payment_schedule").toString().equals("biweekly")){
+					CommissionedPaymentClassification commissionClassification =  new CommissionedPaymentClassification(Double.parseDouble(result.getString("commissionRate")),result.getDouble("monthlySalary"));
+					BiweeklyPaymentSchedule biweeklyPayment = new BiweeklyPaymentSchedule();
+					employee.setPaymentClassification(commissionClassification);
+					employee.setPaymentSchedule(biweeklyPayment);
+				}
+				if(result.getString("payment_type").toString().equals("salary") &&
+						result.getString("payment_schedule").toString().equals("monthly")){
+					SalariedClassification salaryClassification =  new SalariedClassification(result.getDouble("salary"));
+					MonthlyPaymentSchedule monthlyPayment = new MonthlyPaymentSchedule();
+					employee.setPaymentClassification(salaryClassification);
+					employee.setPaymentSchedule(monthlyPayment);
+				}
 
 		}catch (Exception e){
 			System.out.println("se murio");
