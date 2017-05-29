@@ -56,6 +56,10 @@ public class MemoryDatabase implements Repository{
 	public Employee getEmployee(Integer employeeId) {
 		return null;
 	}
+	
+	public Repository getRepository(){
+		return globalPayrollDatabase;
+	}
     
     
     

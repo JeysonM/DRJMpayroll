@@ -13,6 +13,7 @@ import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
 public class PaymentService {
 	private Repository repository;
+	
 	private Transaction paymentTransaction;
 	private PaydayTransaction paydayTransaction;
 	

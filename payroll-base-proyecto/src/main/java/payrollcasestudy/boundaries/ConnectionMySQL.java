@@ -20,9 +20,10 @@ import payrollcasestudy.entities.paymentschedule.WeeklyPaymentSchedule;
 public class ConnectionMySQL implements Repository{
 	
 	public static ConnectionMySQL relationalDatabase = new ConnectionMySQL();
+	public static MemoryDatabase memoryDatabase = new MemoryDatabase();
 	
 	private Connection connection;
-	private String localhost = "jdbc:mysql://localhost:3306";
+	private String localhost = "jdbc:mysql://localhost:33060";
 	private String userDB = "root";
 	private String password = "root";
 	
@@ -34,6 +35,10 @@ public class ConnectionMySQL implements Repository{
 			return "Connection failed";
 		}
 		
+	}
+	
+	public Repository getRepository(){
+		return this.memoryDatabase;
 	}
 	
 	public void addEmployee(int employeeId, Employee employee) {
@@ -60,7 +65,7 @@ public class ConnectionMySQL implements Repository{
     {
 		int result=0;
 		HourlyPaymentClassification hourlyClassification =  (HourlyPaymentClassification) employee.getPaymentClassification();
-		
+		memoryDatabase.addEmployee(employeeId, employee);
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query_employee = "INSERT INTO rosquete_db.employee "
@@ -83,6 +88,7 @@ public class ConnectionMySQL implements Repository{
     {
 		int result=0;
 		SalariedClassification salariedPayment =  (SalariedClassification) employee.getPaymentClassification();
+		memoryDatabase.addEmployee(employeeId, employee);
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query_employee = "INSERT INTO rosquete_db.employee "
@@ -105,6 +111,7 @@ public class ConnectionMySQL implements Repository{
     {
 		int result=0;
 		CommissionedPaymentClassification commissionPayment =  (CommissionedPaymentClassification) employee.getPaymentClassification();
+		memoryDatabase.addEmployee(employeeId, employee);
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, userDB,password);
 			String query_employee = "INSERT INTO rosquete_db.employee "
@@ -149,6 +156,7 @@ public class ConnectionMySQL implements Repository{
 				Employee employee = new Employee(Integer.parseInt(results.getString("ci_employee")),
 						results.getString("first_name"),results.getString("address"));
 				employeesList.add(employee);
+				
 			}
 			return employeesList;
 		}catch (Exception e){
@@ -168,6 +176,7 @@ public class ConnectionMySQL implements Repository{
 			results = ((java.sql.Statement) stmt).executeQuery(query);
 			while(results.next()){
 				employees.add(results.getInt("ci_employee"));
+
 			}
 			return employees;
 		}catch (Exception e){
@@ -204,36 +213,32 @@ public class ConnectionMySQL implements Repository{
 		ResultSet result=null;
 		try{
 			result = returnEmployeePaymentClassificationFromDB(employeeId);
-			System.out.println("logre salir de returnEmployeePaymentClassificationFromDB");
-			
-				System.out.println("logre entrar al segundo while");
-				employee = new Employee(Integer.parseInt(result.getString("ci_employee")),
-					result.getString("first_name"),
-					result.getString("address"));
-				
-				if(result.getString("payment_type").toString().equals("hourly") &&
-						result.getString("payment_schedule").toString().equals("weekly")){
-					System.out.println("logre a la condicion hourly");
-					HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(result.getString("hourlyRate")));
-					WeeklyPaymentSchedule weeklyPayment = new WeeklyPaymentSchedule();
-					employee.setPaymentClassification(hourlyClassification);
-					employee.setPaymentSchedule(weeklyPayment);
-					
-				}
-				if(result.getString("payment_type").toString().equals("commission") &&
-						result.getString("payment_schedule").toString().equals("biweekly")){
-					CommissionedPaymentClassification commissionClassification =  new CommissionedPaymentClassification(Double.parseDouble(result.getString("commissionRate")),result.getDouble("monthlySalary"));
-					BiweeklyPaymentSchedule biweeklyPayment = new BiweeklyPaymentSchedule();
-					employee.setPaymentClassification(commissionClassification);
-					employee.setPaymentSchedule(biweeklyPayment);
-				}
-				if(result.getString("payment_type").toString().equals("salary") &&
-						result.getString("payment_schedule").toString().equals("monthly")){
-					SalariedClassification salaryClassification =  new SalariedClassification(result.getDouble("salary"));
-					MonthlyPaymentSchedule monthlyPayment = new MonthlyPaymentSchedule();
-					employee.setPaymentClassification(salaryClassification);
-					employee.setPaymentSchedule(monthlyPayment);
-				}
+			employee = memoryDatabase.getEmployee(result.getInt("ci_employee"));
+//			
+//				if(result.getString("payment_type").toString().equals("hourly") &&
+//						result.getString("payment_schedule").toString().equals("weekly")){
+//					System.out.println("logre a la condicion hourly");
+//					HourlyPaymentClassification hourlyClassification =  new HourlyPaymentClassification(Double.parseDouble(result.getString("hourlyRate")));
+//					WeeklyPaymentSchedule weeklyPayment = new WeeklyPaymentSchedule();
+//					employee.setPaymentClassification(hourlyClassification);
+//					employee.setPaymentSchedule(weeklyPayment);
+//					
+//				}
+//				if(result.getString("payment_type").toString().equals("commission") &&
+//						result.getString("payment_schedule").toString().equals("biweekly")){
+//					CommissionedPaymentClassification commissionClassification =  new CommissionedPaymentClassification(Double.parseDouble(result.getString("commissionRate")),result.getDouble("monthlySalary"));
+//					BiweeklyPaymentSchedule biweeklyPayment = new BiweeklyPaymentSchedule();
+//					employee.setPaymentClassification(commissionClassification);
+//					employee.setPaymentSchedule(biweeklyPayment);
+//				}
+//				if(result.getString("payment_type").toString().equals("salary") &&
+//						result.getString("payment_schedule").toString().equals("monthly")){
+//					SalariedClassification salaryClassification =  new SalariedClassification(result.getDouble("salary"));
+//					MonthlyPaymentSchedule monthlyPayment = new MonthlyPaymentSchedule();
+//					employee.setPaymentClassification(salaryClassification);
+//					employee.setPaymentSchedule(monthlyPayment);
+//				}
+
 		}catch (Exception e){
 			System.out.println("se murio");
 			System.err.println(e);

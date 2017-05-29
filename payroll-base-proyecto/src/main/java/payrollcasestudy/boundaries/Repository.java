@@ -6,6 +6,7 @@ import java.util.Set;
 import payrollcasestudy.entities.Employee;
 
 public interface Repository {
+	Repository getRepository();
 	void addEmployee(int employeeId, Employee employee);
 	List<Employee> getEmployees();
 	Employee getEmployee(int employeeId);
