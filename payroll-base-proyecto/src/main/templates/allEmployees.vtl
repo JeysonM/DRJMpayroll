@@ -1,0 +1,56 @@
+
+  	<div class="container">
+  		<div class="row">
+  			<h1>Empleados</h1>
+		  	<hr />
+		  	<br><br>
+		  	<table class="table table-hover">
+		  		<thead>
+		  			<th>CI</th>
+		  			<th>Nombre</th>
+		  			<th>Direccion</th>
+		  			<th>Detalle</th>
+		  			<th>Detalle Pago</th>
+		  			
+		  		</thead>
+		  		<tbody class="table table-hover">
+		  			#foreach( $employee in $employees )
+		  				<tr>
+				  			<td>${employee.getEmployeeId().toString()}</td>
+				  			<td>${employee.getName().toString()}</td>
+				  			<td>${employee.getAddress().toString()}</td>
+				  			<td><a href="employees/show/${employee.getEmployeeId()}" >Ver Detalle</a></td>
+				  			<td><a href="pay/show/${employee.getEmployeeId()}" >Ver Pago</a></td>
+			  			<tr>
+		  			#end
+		  		</tbody>
+		  	</table>
+  		</div>
+	  	<br><br>
+  		
+	  	<div class="row">
+		  <div class="col-md-8">
+  		 	<div class="row">
+  		 		<div class="btn-group btn-group-sm" role="group">
+				  <a class="btn btn-default" href="employees/newHourly" class="btn btn-success ">
+					  		Añadir Nuevo Empleado Por Hora <i class="glyphicon glyphicon-plus"></i></a>
+				  <a class="btn btn-default" href="employees/newSalaried" class="btn btn-success ">
+						  		Añadir Nuevo Empleado Con Sueldo Fijo <i class="glyphicon glyphicon-plus"></i></a>
+				  <a class="btn btn-default" href="employees/newCommissioned" class="btn btn-success">
+						  		Añadir Nuevo Empleado Con Comisión <i class="glyphicon glyphicon-plus"></i></a>
+				</div>
+		  		
+		  	</div><br>
+		  </div>
+		  <div class="col-md-4">	
+	  		<div class="row">
+			  	<a href="payAll" ><button type="button" class="btn btn-warning btn-lg">Pagar a todos</button></a>
+	  		</div>
+		  </div>
+		  
+		</div>	
+	  	
+	  	
+	  	
+	  	
+  	</div>

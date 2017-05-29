@@ -1,8 +1,10 @@
 package payrollcasestudy.entities;
 
 import payrollcasestudy.entities.affiliations.UnionAffiliation;
+import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
+import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
-import payrollcasestudy.entities.paymentmethods.PaymentMethod;
+import payrollcasestudy.entities.paymentclassifications.SalariedClassification;
 import payrollcasestudy.entities.paymentschedule.PaymentSchedule;
 
 import java.util.Calendar;
@@ -10,7 +12,6 @@ import java.util.Calendar;
 public class Employee {
     private PaymentClassification paymentClassification;
     private PaymentSchedule paymentSchedule;
-    private PaymentMethod paymentMethod;
     private int employeeId;
     private String name;
     private String address;
@@ -27,6 +28,31 @@ public class Employee {
     public PaymentClassification getPaymentClassification() {
         return paymentClassification;
     }
+    
+    public boolean isHourlyPaymentClassification() {
+    	boolean typePayment=false;
+    	if(paymentClassification instanceof  HourlyPaymentClassification){
+    		typePayment=true;
+    	}
+        return typePayment;
+    }
+    
+    
+    public boolean isCommissionedPaymentClassification() {
+    	boolean typePayment=false;
+    	if(paymentClassification instanceof  CommissionedPaymentClassification){
+    		typePayment=true;
+    	}
+        return typePayment;
+    }
+    
+    public boolean isSalariedClassification() {
+    	boolean typePayment=false;
+    	if(paymentClassification instanceof  SalariedClassification){
+    		typePayment=true;
+    	}
+        return typePayment;
+    }
 
     public void setPaymentClassification(PaymentClassification paymentClassification) {
         this.paymentClassification = paymentClassification;
@@ -36,16 +62,12 @@ public class Employee {
         this.paymentSchedule = paymentSchedule;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
     public String getName() {
         return name;
     }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
+    
+    public int getEmployeeId() {
+        return employeeId;
     }
 
     public PaymentSchedule getPaymentSchedule() {
@@ -79,7 +101,6 @@ public class Employee {
         payCheck.setGrossPay(grossPay);
         payCheck.setNetPay(netPay);
         payCheck.setDeductions(deductions);
-        paymentMethod.pay(payCheck);
     }
 
 	public UnionAffiliation getUnionAffiliation() {

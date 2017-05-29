@@ -12,4 +12,5 @@ public abstract class PaymentClassification {
         return date.equals(payPeriodEnd) || date.equals(payPeriodStart) ||
                 (date.after(payPeriodStart) && date.before(payPeriodEnd));
     }
+	
 }

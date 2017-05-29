@@ -1,14 +1,15 @@
 package payrollcasestudy.transactions.add;
 
-import org.junit.Rule;
 import org.junit.Test;
-import payrollcasestudy.DatabaseResource;
+import payrollcasestudy.boundaries.MemoryDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.TimeCard;
 import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.transactions.Transaction;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -17,22 +18,20 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class AddTimeCardTransactionTest {
-
-    @Rule
-    public DatabaseResource database = new DatabaseResource();
-
+	
+	private static final Repository repository = new MemoryDatabase();
     @Test
-    public void testTimeCardTransaction(){
+    public void testTimeCardTransaction() throws SQLException{
         int employeeId = 2;
         AddHourlyEmployeeTransaction addHourlyEmployee =
                 new AddHourlyEmployeeTransaction(employeeId, "Billy", "Home", 15.25);
-        addHourlyEmployee.execute();
+        addHourlyEmployee.execute(repository);
 
         Calendar date = new GregorianCalendar(2001,10,31);
         Transaction timeCardTransaction = new AddTimeCardTransaction(date, 8.0, employeeId);
-        timeCardTransaction.execute();
+        timeCardTransaction.execute(repository);
 
-        Employee employee = database.getInstance().getEmployee(employeeId);
+        Employee employee = repository.getEmployee(employeeId);
         assertThat(employee, is(notNullValue()));
 
         PaymentClassification paymentClassification = employee.getPaymentClassification();

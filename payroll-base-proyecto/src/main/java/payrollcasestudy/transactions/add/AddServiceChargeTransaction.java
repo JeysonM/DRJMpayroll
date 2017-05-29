@@ -2,12 +2,9 @@ package payrollcasestudy.transactions.add;
 
 import java.util.Calendar;
 
-import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
-import payrollcasestudy.entities.SalesReceipt;
 import payrollcasestudy.entities.ServiceCharge;
-import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
-import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.transactions.Transaction;
 
 public class AddServiceChargeTransaction implements Transaction {
@@ -21,9 +18,9 @@ public class AddServiceChargeTransaction implements Transaction {
         this.amount = amount;
     }
 	
-	public void execute(){
+	public void execute(Repository repository){
 		
-		Employee employee = PayrollDatabase.globalPayrollDatabase.getUnionMember(memberId);
+		Employee employee = repository.getUnionMember(memberId);
 		if(employee != null){
 				employee.getUnionAffiliation().addServiceCharge(date, new ServiceCharge(date, amount));
 		}

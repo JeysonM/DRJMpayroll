@@ -1,12 +1,11 @@
 package payrollcasestudy.transactions.add;
 
-import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.SalesReceipt;
 import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.transactions.Transaction;
-
 import java.util.Calendar;
 
 public class AddSalesReceiptTransaction implements Transaction{
@@ -21,8 +20,8 @@ public class AddSalesReceiptTransaction implements Transaction{
         this.employeeId = employeeId;
     }
 
-    public void execute() {
-        Employee employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+    public void execute(Repository repository){
+        Employee employee = repository.getEmployee(employeeId);
         if (employee != null){
             PaymentClassification paymentClassification = employee.getPaymentClassification();
             if (paymentClassification instanceof CommissionedPaymentClassification){
