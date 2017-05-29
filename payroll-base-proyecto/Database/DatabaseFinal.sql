@@ -66,7 +66,6 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (111,'Lauren ','Jauregui','Miami','salary','monthly'),(222,'Ally Brooke','Hernandez','Texas','salary','monthly'),(333,'Cris Refield','Refield','Raccoon City','hourly','weekly');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +90,6 @@ CREATE TABLE `hourly_payment_classification` (
 
 LOCK TABLES `hourly_payment_classification` WRITE;
 /*!40000 ALTER TABLE `hourly_payment_classification` DISABLE KEYS */;
-INSERT INTO `hourly_payment_classification` VALUES (333,60);
 /*!40000 ALTER TABLE `hourly_payment_classification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +141,6 @@ CREATE TABLE `salaried_classification` (
 
 LOCK TABLES `salaried_classification` WRITE;
 /*!40000 ALTER TABLE `salaried_classification` DISABLE KEYS */;
-INSERT INTO `salaried_classification` VALUES (111,5000),(222,8000);
 /*!40000 ALTER TABLE `salaried_classification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +195,6 @@ CREATE TABLE `time_card` (
 
 LOCK TABLES `time_card` WRITE;
 /*!40000 ALTER TABLE `time_card` DISABLE KEYS */;
-INSERT INTO `time_card` VALUES ('1',333,2,'2017-05-23');
 /*!40000 ALTER TABLE `time_card` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-26 10:43:49
+-- Dump completed on 2017-05-29  9:00:21
