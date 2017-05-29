@@ -1,13 +1,12 @@
 package payrollcasestudy.transactions.add;
 
-import org.junit.Rule;
+
 import org.junit.Test;
 import payrollcasestudy.boundaries.MemoryDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.ServiceCharge;
 import payrollcasestudy.entities.affiliations.UnionAffiliation;
-//import payrollcasestudy.entities.affiliations.UnionAffiliation;
 import payrollcasestudy.transactions.Transaction;
 
 import java.util.Calendar;
@@ -31,8 +30,8 @@ public class AddServiceChargeTransactionTest {
         Employee employee = repository.getEmployee(employeeId);
         assertThat(employee, is(notNullValue()));
 
-        int memberId = 86; //Maxwell Smart
-        UnionAffiliation unionAffiliation = new UnionAffiliation(memberId,12.5); //monto cobrado mensualmente
+        int memberId = 86; 
+        UnionAffiliation unionAffiliation = new UnionAffiliation(memberId,12.5); 
         employee.setUnionAffiliation(unionAffiliation);
         repository.addUnionMember(memberId, employee);
         assertThat(repository.getUnionMember(memberId), is(notNullValue()));

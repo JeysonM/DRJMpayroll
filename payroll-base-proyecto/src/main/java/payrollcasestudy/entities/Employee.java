@@ -5,17 +5,13 @@ import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClass
 import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.SalariedClassification;
-import payrollcasestudy.entities.paymentmethods.PaymentMethod;
 import payrollcasestudy.entities.paymentschedule.PaymentSchedule;
-import payrollcasestudy.transactions.Transaction;
-import payrollcasestudy.transactions.add.AddHourlyEmployeeTransaction;
 
 import java.util.Calendar;
 
 public class Employee {
     private PaymentClassification paymentClassification;
     private PaymentSchedule paymentSchedule;
-    private PaymentMethod paymentMethod;
     private int employeeId;
     private String name;
     private String address;
@@ -66,20 +62,12 @@ public class Employee {
         this.paymentSchedule = paymentSchedule;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
     public String getName() {
         return name;
     }
     
     public int getEmployeeId() {
         return employeeId;
-    }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
     }
 
     public PaymentSchedule getPaymentSchedule() {
@@ -113,7 +101,6 @@ public class Employee {
         payCheck.setGrossPay(grossPay);
         payCheck.setNetPay(netPay);
         payCheck.setDeductions(deductions);
-        //paymentMethod.pay(payCheck);
     }
 
 	public UnionAffiliation getUnionAffiliation() {

@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hamcrest.Matcher;
 
 import static payrollcasestudy.entities.paymentclassifications.PaymentClassification.isInPayPeriod;
 import payrollcasestudy.entities.PayCheck;

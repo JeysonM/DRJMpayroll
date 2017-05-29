@@ -1,13 +1,9 @@
 package payrollcasestudy.transactions.services;
 
-import static java.util.Calendar.NOVEMBER;
-
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import payrollcasestudy.boundaries.ConnectionMySQL;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.transactions.PaydayTransaction;
@@ -27,7 +23,6 @@ public class PaymentService {
 	public void createPaymentForHourly(String employeeId, String year, String month, String day, String hours)
 	{
 		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day));
-		System.out.println("entre al metodo y cree la fecha" + employeeId);
 		paymentTransaction = new AddTimeCardTransaction(date, Double.parseDouble(hours),Integer.parseInt(employeeId));
 		paymentTransaction.execute(repository);
 		

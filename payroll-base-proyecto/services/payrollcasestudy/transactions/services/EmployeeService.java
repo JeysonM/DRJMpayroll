@@ -1,27 +1,13 @@
 package payrollcasestudy.transactions.services;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
-import payrollcasestudy.boundaries.ConnectionMySQL;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
-import payrollcasestudy.entities.PayCheck;
-import payrollcasestudy.transactions.PaydayTransaction;
 import payrollcasestudy.transactions.Transaction;
 import payrollcasestudy.transactions.add.AddCommissionedEmployeeTransaction;
-import payrollcasestudy.transactions.add.AddEmployeeTransaction;
 import payrollcasestudy.transactions.add.AddHourlyEmployeeTransaction;
 import payrollcasestudy.transactions.add.AddSalariedEmployeeTransaction;
-import payrollcasestudy.transactions.add.AddSalesReceiptTransaction;
-import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
 public class EmployeeService {
 	private Repository repository;

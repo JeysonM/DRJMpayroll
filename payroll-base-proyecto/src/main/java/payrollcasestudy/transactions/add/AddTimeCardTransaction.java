@@ -7,7 +7,6 @@ import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassificat
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.transactions.Transaction;
 
-import java.sql.SQLException;
 import java.util.Calendar;
 
 public class AddTimeCardTransaction implements Transaction {

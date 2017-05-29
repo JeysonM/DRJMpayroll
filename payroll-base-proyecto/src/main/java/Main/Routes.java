@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import payrollcasestudy.api.JsonUtil;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
@@ -29,7 +27,6 @@ public class Routes {
 	
 	public void manageRoutes()
 	{
-		JsonUtil apiJson;
 		HashMap<String,Object> view = new HashMap<String,Object>();
 		get("/", (request, response) -> {
 			
@@ -148,8 +145,6 @@ public class Routes {
 		get("/api/v1/pays", (req, res) -> paymentService.getAllPayChecksFromPayDayTransaction(), JsonUtil.json());
 		
 		get("/api/v1/pays/:id", (request, response) -> {
-			//Pair<Employee,PayCheck> pair;
-			String pair;
 			Employee employee;
 			PayCheck payCheck;
 			

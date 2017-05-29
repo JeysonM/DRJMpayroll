@@ -1,6 +1,5 @@
 package payrollcasestudy.transactions.change;
 
-import org.junit.Rule;
 import org.junit.Test;
 import payrollcasestudy.boundaries.MemoryDatabase;
 import payrollcasestudy.boundaries.Repository;

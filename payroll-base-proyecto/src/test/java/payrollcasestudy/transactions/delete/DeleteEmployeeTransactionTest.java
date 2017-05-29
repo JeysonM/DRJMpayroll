@@ -1,6 +1,5 @@
 package payrollcasestudy.transactions.delete;
 
-import org.junit.Rule;
 import org.junit.Test;
 import payrollcasestudy.boundaries.MemoryDatabase;
 import payrollcasestudy.boundaries.Repository;

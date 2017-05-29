@@ -1,13 +1,11 @@
 package payrollcasestudy.transactions.add;
 
-import org.junit.Rule;
 import org.junit.Test;
 import payrollcasestudy.boundaries.MemoryDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
-import payrollcasestudy.entities.paymentmethods.HoldMethod;
 import payrollcasestudy.entities.paymentschedule.BiweeklyPaymentSchedule;
 import payrollcasestudy.transactions.Transaction;
 
@@ -41,7 +39,6 @@ public class AddCommissionedEmployeeTransactionTest {
         assertThat(commissionedClassification.getMonthlySalary(), is(closeTo(200.0, FLOAT_ACCURACY)));
 
         assertThat(employee.getPaymentSchedule(), is(instanceOf(BiweeklyPaymentSchedule.class)));
-        assertThat(employee.getPaymentMethod(), is(instanceOf(HoldMethod.class)));
     }
 
 }

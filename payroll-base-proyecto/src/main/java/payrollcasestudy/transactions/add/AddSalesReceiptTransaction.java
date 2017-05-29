@@ -6,8 +6,6 @@ import payrollcasestudy.entities.SalesReceipt;
 import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.transactions.Transaction;
-
-import java.sql.SQLException;
 import java.util.Calendar;
 
 public class AddSalesReceiptTransaction implements Transaction{

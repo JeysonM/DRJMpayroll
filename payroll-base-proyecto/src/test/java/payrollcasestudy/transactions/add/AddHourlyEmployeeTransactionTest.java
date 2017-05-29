@@ -1,13 +1,11 @@
 package payrollcasestudy.transactions.add;
 
-import org.junit.Rule;
 import org.junit.Test;
 import payrollcasestudy.boundaries.MemoryDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
-import payrollcasestudy.entities.paymentmethods.HoldMethod;
 import payrollcasestudy.entities.paymentschedule.WeeklyPaymentSchedule;
 import payrollcasestudy.transactions.Transaction;
 import static payrollcasestudy.TestConstants.*;
@@ -39,7 +37,6 @@ public class AddHourlyEmployeeTransactionTest  {
         assertThat(hourlyPaymentClassification.getHourlyRate(), is(closeTo(20.0, FLOAT_ACCURACY)));
 
         assertThat(employee.getPaymentSchedule(), is(instanceOf(WeeklyPaymentSchedule.class)));
-        assertThat(employee.getPaymentMethod(), is(instanceOf(HoldMethod.class)));
     }
 
 }

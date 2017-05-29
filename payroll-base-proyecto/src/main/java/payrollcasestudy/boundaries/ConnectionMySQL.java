@@ -6,14 +6,11 @@ import java.util.List;
 import java.util.Set;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
 import com.mysql.jdbc.Connection;
 
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
-import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.SalariedClassification;
 import payrollcasestudy.entities.paymentschedule.BiweeklyPaymentSchedule;
 import payrollcasestudy.entities.paymentschedule.MonthlyPaymentSchedule;
@@ -28,7 +25,6 @@ public class ConnectionMySQL implements Repository{
 	private String localhost = "jdbc:mysql://localhost:3306";
 	private String userDB = "root";
 	private String password = "root";
-
 	
 	public String getStatusConnection() {
 		try{
@@ -41,7 +37,7 @@ public class ConnectionMySQL implements Repository{
 	}
 	
 	public void addEmployee(int employeeId, Employee employee) {
-		int result=0;
+		int result = 0;
 		try{
 			if(employee.isHourlyPaymentClassification())
 			{
@@ -181,27 +177,25 @@ public class ConnectionMySQL implements Repository{
 	}
 
 	public void deleteUnionMember(int memberId) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	public void addUnionMember(int memberId, Employee employee) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	public Employee getUnionMember(int memberId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public void deleteEmployee(int employeeId) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void clear() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -211,13 +205,11 @@ public class ConnectionMySQL implements Repository{
 		try{
 			result = returnEmployeePaymentClassificationFromDB(employeeId);
 			System.out.println("logre salir de returnEmployeePaymentClassificationFromDB");
-			//while(result.next()){
+			
 				System.out.println("logre entrar al segundo while");
 				employee = new Employee(Integer.parseInt(result.getString("ci_employee")),
 					result.getString("first_name"),
 					result.getString("address"));
-				//System.out.println("first_name >> "+result.getString("first_name").toString());
-				//System.out.println("payment_type >> "+result.getString("payment_type").toString());
 				
 				if(result.getString("payment_type").toString().equals("hourly") &&
 						result.getString("payment_schedule").toString().equals("weekly")){
@@ -242,7 +234,6 @@ public class ConnectionMySQL implements Repository{
 					employee.setPaymentClassification(salaryClassification);
 					employee.setPaymentSchedule(monthlyPayment);
 				}
-			//}
 		}catch (Exception e){
 			System.out.println("se murio");
 			System.err.println(e);

@@ -1,6 +1,5 @@
 package payrollcasestudy.transactions;
 
-import org.junit.Rule;
 import org.junit.Test;
 import payrollcasestudy.boundaries.MemoryDatabase;
 import payrollcasestudy.boundaries.Repository;
@@ -37,7 +36,6 @@ public class PaydayTransactionTest {
         PayCheck payCheck = paydayTransaction.getPaycheck(employeeId);
         assertThat(payCheck.getPayPeriodEnd(), is(payDate));
         assertThat(payCheck.getGrossPay(), is(closeTo(1000.0, FLOAT_ACCURACY)));
-        //assertThat(payCheck.getField("Disposition"), is("Hold"));
         assertThat(payCheck.getDeductions(), is(closeTo(0, FLOAT_ACCURACY)));
         assertThat(payCheck.getNetPay(), is(closeTo(1000.0, FLOAT_ACCURACY)));
     }
@@ -237,7 +235,6 @@ public class PaydayTransactionTest {
         PayCheck payCheck = paydayTransaction.getPaycheck(employeeId);
         assertThat(payCheck.getPayPeriodEnd(), is(payDate));
         assertThat(payCheck.getGrossPay(), is(closeTo(8 * hourlyRate, FLOAT_ACCURACY)));
-        //assertThat("Hold", is(payCheck.getField("Disposition")));
         assertThat(payCheck.getDeductions(), is(closeTo(weeklyUnionDues + serviceCharge, FLOAT_ACCURACY)));
         assertThat(payCheck.getNetPay(), is(closeTo(8 * hourlyRate - (weeklyUnionDues + serviceCharge), FLOAT_ACCURACY)));
     }
@@ -279,7 +276,6 @@ public class PaydayTransactionTest {
         PayCheck payCheck = paydayTransaction.getPaycheck(employeeId);
         assertThat(payCheck.getPayPeriodEnd(), is(payDate));
         assertThat(payCheck.getGrossPay(), is(closeTo(8 * hourlyRate, FLOAT_ACCURACY)));
-       // assertThat("Hold", is(payCheck.getField("Disposition")));
         assertThat(payCheck.getDeductions(), is(closeTo(weeklyUnionDues + serviceCharge, FLOAT_ACCURACY)));
         assertThat(payCheck.getNetPay(), is(closeTo(8 * hourlyRate - (weeklyUnionDues + serviceCharge), FLOAT_ACCURACY)));
     }
@@ -290,7 +286,6 @@ public class PaydayTransactionTest {
         assertThat(payCheck, is(notNullValue()));
         assertThat(payCheck.getPayPeriodEnd(), is(payDate));
         assertThat(payCheck.getGrossPay(), is(closeTo(expectedGross, FLOAT_ACCURACY)));
-        //assertThat(payCheck.getField("Disposition"), is("Hold"));
         assertThat(payCheck.getDeductions(), is(closeTo(expectedDeductions, FLOAT_ACCURACY)));
         assertThat(payCheck.getNetPay(), is(closeTo(expectedGross - expectedDeductions, FLOAT_ACCURACY)));
     }
@@ -304,7 +299,6 @@ public class PaydayTransactionTest {
         PayCheck payCheck = paydayTransaction.getPaycheck(employeeId);
         assertThat(payCheck.getPayPeriodEnd(), is(payDate));
         assertThat(payCheck.getGrossPay(), is(closeTo(expectedGrossPay, FLOAT_ACCURACY)));
-        //assertThat(payCheck.getField("Disposition"), is("Hold"));
         assertThat(payCheck.getDeductions(), is(closeTo(0, FLOAT_ACCURACY)));
         assertThat(payCheck.getNetPay(), is(closeTo(expectedGrossPay, FLOAT_ACCURACY)));
     }

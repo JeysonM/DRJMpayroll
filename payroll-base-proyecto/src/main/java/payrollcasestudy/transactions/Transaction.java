@@ -1,6 +1,5 @@
 package payrollcasestudy.transactions;
 
-import java.sql.SQLException;
 
 import payrollcasestudy.boundaries.Repository;
 

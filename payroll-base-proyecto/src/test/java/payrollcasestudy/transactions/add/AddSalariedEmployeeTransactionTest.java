@@ -1,6 +1,5 @@
 package payrollcasestudy.transactions.add;
 
-import org.junit.Rule;
 import org.junit.Test;
 
 import payrollcasestudy.boundaries.MemoryDatabase;
@@ -9,7 +8,6 @@ import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.affiliations.UnionAffiliation;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.SalariedClassification;
-import payrollcasestudy.entities.paymentmethods.HoldMethod;
 import payrollcasestudy.entities.paymentschedule.MonthlyPaymentSchedule;
 import payrollcasestudy.transactions.Transaction;
 
@@ -41,7 +39,6 @@ public class AddSalariedEmployeeTransactionTest {
         assertThat(salariedClassification.getSalary(), closeTo(1000.0, FLOAT_ACCURACY));
 
         assertThat(employee.getPaymentSchedule(), is(instanceOf(MonthlyPaymentSchedule.class)));
-        assertThat(employee.getPaymentMethod(), is(instanceOf(HoldMethod.class)));
         assertThat(employee.getUnionAffiliation(), is(UnionAffiliation.NO_AFFILIATION));
     }
 
