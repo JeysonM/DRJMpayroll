@@ -2,6 +2,7 @@ package payrollcasestudy.entities.affiliations;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -12,7 +13,7 @@ import payrollcasestudy.entities.ServiceCharge;
 public class UnionAffiliation {
 	private int numberId;
 	private double amount;
-	private AffiliationClassification affiliationClassification;
+	private List<AffiliationClassification> affiliationClassification;
 	private Map<Calendar, ServiceCharge> serviceCharges = new HashMap<Calendar, ServiceCharge>();
 
 	public static final UnionAffiliation NO_AFFILIATION = new UnionAffiliation(0,0);
@@ -64,12 +65,12 @@ public class UnionAffiliation {
 		return numberOfFridays;
 	}
 	
-	public  void setAffiliationClassification(AffiliationClassification affiliationClassification)
+	public  void setAffiliationClassification(List<AffiliationClassification> affiliationClassification)
 	{
 		this.affiliationClassification = affiliationClassification;
 	}
 	
-	public AffiliationClassification getAffiliationClassification()
+	public List<AffiliationClassification> getAffiliationClassification()
 	{
 		return affiliationClassification;
 	}

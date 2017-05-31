@@ -6,7 +6,8 @@ public class SocialSecurityAffiliation implements AffiliationClassification {
 
 	@Override
 	public double calculateDiscount(PayCheck payCheck) {
-		return 0;
+		double _DISCOUNT = 0.12;
+		return payCheck.getGrossPay()-_DISCOUNT;
 	}
 
 }
