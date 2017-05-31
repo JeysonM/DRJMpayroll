@@ -23,7 +23,7 @@ public class ConnectionMySQL implements Repository{
 	public static MemoryDatabase memoryDatabase = new MemoryDatabase();
 	
 	private Connection connection;
-	private String localhost = "jdbc:mysql://localhost:33060";
+	private String localhost = "jdbc:mysql://localhost:3306";
 	private String userDB = "root";
 	private String password = "root";
 	

@@ -12,6 +12,7 @@ import payrollcasestudy.entities.ServiceCharge;
 public class UnionAffiliation {
 	private int numberId;
 	private double amount;
+	private AffiliationClassification affiliationClassification;
 	private Map<Calendar, ServiceCharge> serviceCharges = new HashMap<Calendar, ServiceCharge>();
 
 	public static final UnionAffiliation NO_AFFILIATION = new UnionAffiliation(0,0);
@@ -62,8 +63,16 @@ public class UnionAffiliation {
 		}
 		return numberOfFridays;
 	}
-
 	
+	public  void setAffiliationClassification(AffiliationClassification affiliationClassification)
+	{
+		this.affiliationClassification = affiliationClassification;
+	}
+	
+	public AffiliationClassification getAffiliationClassification()
+	{
+		return affiliationClassification;
+	}
 	
 	
 }
